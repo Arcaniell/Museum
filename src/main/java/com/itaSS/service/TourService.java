@@ -32,7 +32,7 @@ public class TourService extends BaseService {
 
     public void setHallsToTour(Set<Hall> halls, Tour id_tour) {
         TourDao tourDao = new TourDao(Tour.class);
-        tourDao.setHallsToTout(halls, id_tour);
+        tourDao.setHallsToTour(halls, id_tour);
     }
 
 }

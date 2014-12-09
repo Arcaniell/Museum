@@ -68,7 +68,9 @@ public class Console {
         System.out.println("3. Add Tour");
         System.out.println("4. Add Worker");
         System.out.println("5. Set Exhibit to Hall");
-        System.out.println("6. Set Hall to Tour");
+        System.out.println("6. Set Halls to Tour");
+        System.out.println("7. Set Worker to Hall");
+        System.out.println("8. Set Worker to Tour");
     }
 
     //TODO Do all that stuff by services

@@ -18,14 +18,15 @@ import java.util.*;
 
 public final class DataGenerators {
     public static Random randomizer = new Random(43);
-    private static final String[] EXHIBITS_NAME = {"Statuya1", "Statuya2", "Statuya3", "Statuya4"};
+    private static final String[] EXHIBITS_NAME = {"Statuya1", "Statuya2", "Statuya3", "Statuya4",
+            "Kartuna1", "Kartuna2", "Kartuna3", "Vaza1", "Vaza2", "Vaza3", "Vaza4"};
     private static final Set<String> MAPPED_EX_NAMES = new HashSet<>();
-    private static Calendar calendar;
     private static int counter = 0;
-    private static final String[] AUTHORS_NAME = {"Yurec", "Vasiliy,", "Sashko"};
-    private static final String[] HALLS_NAME = {"A", "B", "C"};
+    private static final String[] AUTHORS_NAME = {"Vasiliy", "Sashko", "Bodia", "Tolik", "Pavlo",
+            "Victoria", "Nazar"};
+    private static final String[] HALLS_NAME = {"A", "B", "C", "D", "E", "F", "G"};
     private static final Set<String> MAPPED_HALL_NAMES = new HashSet<>();
-    private static final String[] TOURS_NAME = {"Dino", "WW", "Hirosima"};
+    private static final String[] TOURS_NAME = {"Dino", "WW", "Hirosima", "Ukraine", "Poland", "Antlantida"};
     private static final String[] WORKERS_NAME = {"Ania", "Petro", "Kolia", "Yan"};
     static {
         for (String name : EXHIBITS_NAME) {
@@ -47,7 +48,7 @@ public final class DataGenerators {
         String exName = MAPPED_EX_NAMES.iterator().next();
         MAPPED_EX_NAMES.remove(exName);
         exhibit.setName(exName);
-        calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
         calendar.set(1993 + counter++, 1 + counter, 10 + counter);
         exhibit.setArrive_date(new Date(calendar.getTime().getTime()));
         exhibit.setAuthor_name(AUTHORS_NAME[randomizer.nextInt(AUTHORS_NAME.length)]);
@@ -119,11 +120,6 @@ public final class DataGenerators {
         for (Worker worker : DataGenerators.genWorkersList()) {
             workerDao.create(worker);
         }
-        Set<Hall> halls = new HashSet<>();
-        halls.add(hallDao.read(7));
-        halls.add(hallDao.read(5));
-        Tour tour = tourDao.read(8);
-        tourDao.setHallsToTout(halls, tour);
     }
 
     public static List<Tour> genTourList() {

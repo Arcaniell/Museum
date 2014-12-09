@@ -36,7 +36,7 @@ public class TourDao extends BaseDao<Tour, Integer> {
         }
     }
 
-    public void setHallsToTout(Set<Hall> halls, Tour id_tour){
+    public void setHallsToTour(Set<Hall> halls, Tour id_tour){
         Session session = null;
         try {
             session = SessionFact.getSessionFactory().openSession();

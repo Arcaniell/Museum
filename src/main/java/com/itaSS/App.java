@@ -6,9 +6,9 @@ import com.itaSS.utils.DataGenerators;
 public class App {
 
     public static void main(String[] args) {
-//        DataGenerators.generateData();
+        DataGenerators.generateData();
         Console console = new Console();
-        console.run();
+//        console.run();
         console.close();
     }
 }
