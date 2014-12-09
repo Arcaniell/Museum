@@ -14,6 +14,8 @@ public class Worker {
     private Integer id;
     @Column(nullable = false)
     String name;
+    @Column(nullable = false)
+    String surname;
     @Column
     BigDecimal salary;
     @Column
@@ -37,6 +39,14 @@ public class Worker {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public BigDecimal getSalary() {
