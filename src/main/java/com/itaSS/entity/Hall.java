@@ -6,17 +6,17 @@ import java.util.Set;
 
 @Entity
 @Table
-public class Hall extends BaseWork{
+public class Hall {
     @Id
     @Column
     @GeneratedValue
     private Integer id;
-    @OneToMany(mappedBy = "hall", cascade = CascadeType.PERSIST)
-    private Set<Exhibit> exhibits;
     @Column(nullable = false)
     private String name;
     @ManyToMany(mappedBy = "hall")
     private Set<Tour> tour = new HashSet<>();
+    @OneToMany(mappedBy = "hall", cascade = CascadeType.PERSIST)
+    private Set<Exhibit> exhibits;
 
     public Hall() { }
 

@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table
-public class Tour extends BaseWork{
+public class Tour {
     @Id
     @Column
     @GeneratedValue
@@ -62,6 +62,18 @@ public class Tour extends BaseWork{
 
     public void setHall(Set<Hall> hall) {
         this.hall = hall;
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(name).append(" ");
+        if (beginDate != null) {
+            stringBuilder.append("begin date: ").append(beginDate.toString()).append(" ");
+        }
+        if (endDate != null) {
+            stringBuilder.append("end date: ").append(endDate.toString());
+        }
+        return stringBuilder.toString();
     }
 
 }

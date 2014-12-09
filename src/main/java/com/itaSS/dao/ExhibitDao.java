@@ -13,22 +13,28 @@ public class ExhibitDao extends BaseDao<Exhibit, Integer> {
         super(type);
     }
 
-    public void addExhibitToHall(Exhibit id, Hall hall) {
+    public void setExhibitToHall(Exhibit exhibit, Hall hall) {
         Session session = SessionFact.getSessionFactory().openSession();
         session.getTransaction().begin();
-        Exhibit exhibit1 = (Exhibit) session.load(Exhibit.class, id.getId());
-        exhibit1.setHall(hall);
+        exhibit.setHall(hall);
+        update(exhibit);
         session.getTransaction().commit();
     }
 
-    public Exhibit getSpecExhi(String name) {
+    public List<Exhibit> getSpecExhibit(String input) {
         Session session = SessionFact.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(Exhibit.class);
+        String[]args = input.split(" ");
+        int argCounter = 0;
+        if (!args[argCounter].equals("-")) {
+            criteria.add(Restrictions.like("name", args[argCounter] + "%"));
+        }
+        argCounter++;
+        if (!args[argCounter].equals("-")) {
+            criteria.add(Restrictions.like("author_name", args[argCounter] + "%"));
+        }
         List<Exhibit> results;
-        Criteria criteria = session.createCriteria(Exhibit.class)
-                .add(Restrictions.like("name", name + "%"))
-                .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
         results = criteria.list();
-        System.out.println(results);
-        return null;
+        return results;
     }
 }

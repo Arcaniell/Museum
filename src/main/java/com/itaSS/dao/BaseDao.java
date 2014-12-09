@@ -55,4 +55,5 @@ public abstract class BaseDao<T, E extends Serializable> {
         session.delete(entity);
         session.getTransaction().commit();
     }
+
 }

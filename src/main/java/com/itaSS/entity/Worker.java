@@ -1,5 +1,7 @@
 package com.itaSS.entity;
 
+import com.itaSS.entity.enumInfo.Positions;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -15,7 +17,7 @@ public class Worker {
     @Column
     BigDecimal salary;
     @Column
-    String position;
+    Positions position;
     @OneToOne
     Hall hall;
     @OneToOne
@@ -45,11 +47,11 @@ public class Worker {
         this.salary = salary;
     }
 
-    public String getPosition() {
+    public Positions getPosition() {
         return position;
     }
 
-    public void setPosition(String position) {
+    public void setPosition(Positions position) {
         this.position = position;
     }
 

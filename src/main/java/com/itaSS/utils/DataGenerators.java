@@ -1,17 +1,22 @@
 package com.itaSS.utils;
 
+import com.itaSS.dao.ExhibitDao;
+import com.itaSS.dao.HallDao;
+import com.itaSS.dao.TourDao;
+import com.itaSS.dao.WorkerDao;
 import com.itaSS.entity.Exhibit;
 import com.itaSS.entity.Hall;
 import com.itaSS.entity.Tour;
 import com.itaSS.entity.Worker;
 import com.itaSS.entity.enumInfo.Materials;
+import com.itaSS.entity.enumInfo.Positions;
 import com.itaSS.entity.enumInfo.Technics;
 
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.*;
 
-public class DataGenerators {
+public final class DataGenerators {
     public static Random randomizer = new Random(43);
     private static final String[] EXHIBITS_NAME = {"Statuya1", "Statuya2", "Statuya3", "Statuya4"};
     private static final Set<String> MAPPED_EX_NAMES = new HashSet<>();
@@ -21,6 +26,7 @@ public class DataGenerators {
     private static final String[] HALLS_NAME = {"A", "B", "C"};
     private static final Set<String> MAPPED_HALL_NAMES = new HashSet<>();
     private static final String[] TOURS_NAME = {"Dino", "WW", "Hirosima"};
+    private static final String[] WORKERS_NAME = {"Ania", "Petro", "Kolia", "Yan"};
     static {
         for (String name : EXHIBITS_NAME) {
             MAPPED_EX_NAMES.add(name);
@@ -76,16 +82,48 @@ public class DataGenerators {
 
     public static Worker genWorker() {
         Worker worker = new Worker();
-        worker.setName("Petro");
-        worker.setPosition("General");
+        worker.setName(WORKERS_NAME[randomizer.nextInt(WORKERS_NAME.length)]);
+        worker.setPosition(getRandVal(Positions.values()));
         worker.setSalary(new BigDecimal("10.5"));
         return worker;
+    }
+
+    public static List<Worker> genWorkersList() {
+        List<Worker> workers = new ArrayList<>();
+        for (int i = 0; i < WORKERS_NAME.length; i++) {
+            workers.add(genWorker());
+        }
+        return workers;
     }
 
     public static Tour genTour() {
         Tour tour = new Tour();
         tour.setName(TOURS_NAME[randomizer.nextInt(TOURS_NAME.length)]);
         return tour;
+    }
+
+    public static void generateData() {
+        ExhibitDao exhibitDao = new ExhibitDao(Exhibit.class);
+        HallDao hallDao = new HallDao(Hall.class);
+        TourDao tourDao = new TourDao(Tour.class);
+        WorkerDao workerDao = new WorkerDao(Worker.class);
+        for (Exhibit exhibit : DataGenerators.genExhibitList()) {
+            exhibitDao.create(exhibit);
+        }
+        for (Hall hall : DataGenerators.genHallList()) {
+            hallDao.create(hall);
+        }
+        for (Tour tour : DataGenerators.genTourList()) {
+            tourDao.create(tour);
+        }
+        for (Worker worker : DataGenerators.genWorkersList()) {
+            workerDao.create(worker);
+        }
+        Set<Hall> halls = new HashSet<>();
+        halls.add(hallDao.read(7));
+        halls.add(hallDao.read(5));
+        Tour tour = tourDao.read(8);
+        tourDao.setHallsToTout(halls, tour);
     }
 
     public static List<Tour> genTourList() {
