@@ -8,7 +8,7 @@ public class App {
     public static void main(String[] args) {
         DataGenerators.generateData();
         Console console = new Console();
-//        console.run();
+        console.run();
         console.close();
     }
 }

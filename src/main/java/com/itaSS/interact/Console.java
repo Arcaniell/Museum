@@ -27,52 +27,46 @@ import java.util.Set;
 public class Console {
 
     public void run() {
-        final int ACTION_NUM = 6;
-        final int ADD_EXHIBIT = 1;
-        final int ADD_HALL = 2;
-        final int ADD_TOUR = 3;
-        final int ADD_WORKER = 4;
-        final int SET_EXHIBIT_TO_HALL = 5;
-        final int SET_HALL_TO_TOUR = 6;
+        //TODO All data in Enum
+//        final int ACTION_NUM = 10;
+//        final int ADD_EXHIBIT = 1;
+//        final int ADD_HALL = 2;
+//        final int ADD_TOUR = 3;
+//        final int ADD_WORKER = 4;
+//        final int SET_EXHIBIT_TO_HALL = 5;
+//        final int SET_HALL_TO_TOUR = 6;
+//        final int SET_WORKER_TO_HALL = 7;
+//        final int SET_WORKER_TO_TOUR = 8;
+//        final int SET_DATES_TO_TOUR = 9;
+//        final int SHOW_HALLS_AND_EXHIBITS_IN_TOUR = 10;
+//
+//        showAction();
+//        int selected = 0;
+//        String input = readLine();
+//        if (checkMenuSelect(input)) {
+//             selected = Integer.valueOf(input);
+//        }
+//        else {
+//            System.out.println("Wrong format, try again!");
+//        }
+        Enum<Actions> selected = (Actions) selectEnum(Actions.class);
 
-        showAction();
-        int selected = 0;
-        String input = readLine();
-        if (checkMenuSelect(input)) {
-             selected = Integer.valueOf(input);
-        }
-        else {
-            System.out.println("Wrong format, try again!");
-        }
-        if (selected > ACTION_NUM) {
-            System.out.println("No such action!");
-        } else if (selected == ADD_EXHIBIT) {
+        if (selected == Actions.ADD_EXHIBIT) {
             addExhibit();
-        } else if (selected == ADD_HALL) {
+        } else if (selected == Actions.ADD_HALL) {
             addHall();
-        } else if (selected == ADD_TOUR) {
+        } else if (selected == Actions.ADD_TOUR) {
             addTour();
-        } else if (selected == ADD_WORKER) {
+        } else if (selected == Actions.ADD_WORKER) {
             addWorker();
-        } else if (selected == SET_EXHIBIT_TO_HALL) {
+        } else if (selected == Actions.SET_EXHIBIT_TO_HALL) {
             setExhibitToHall();
-        } else if (selected == SET_HALL_TO_TOUR) {
+        } else if (selected == Actions.SET_HALL_TO_TOUR) {
             setHallsToTour();
+        } else if (selected == Actions.SET_WORKER_TO_HALL) {
+            setWorkerToHall();
         }
     }
-
-    private void showAction() {
-        System.out.println("Hi! What you want to do?");
-        System.out.println("1. Add Exhibit");
-        System.out.println("2. Add Hall");
-        System.out.println("3. Add Tour");
-        System.out.println("4. Add Worker");
-        System.out.println("5. Set Exhibit to Hall");
-        System.out.println("6. Set Halls to Tour");
-        System.out.println("7. Set Worker to Hall");
-        System.out.println("8. Set Worker to Tour");
-    }
-
     //TODO Do all that stuff by services
 
     private void addExhibit() {
@@ -196,6 +190,10 @@ public class Console {
         tourService.setHallsToTour(halls, tour);
     }
 
+    private void setWorkerToHall() {
+
+    }
+
     private Date readDate() {
         Date result;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -216,7 +214,7 @@ public class Console {
     private Enum<?> selectEnum(Class<? extends Enum<?>> type) {
         int counter = 1;
         for (Enum<?> val : type.getEnumConstants()) {
-            System.out.print("#" + (counter++) + val.toString() + " ");
+            System.out.print("# " + (counter++) + val.toString() + " ");
         }
         System.out.println();
         Enum<?> material;

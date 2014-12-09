@@ -16,26 +16,6 @@ public class TourDao extends BaseDao<Tour, Integer> {
         super(type);
     }
 
-    @Deprecated
-    public void setHallToTour(Hall hall, Tour tour) {
-        Session session = null;
-        try {
-            session = SessionFact.getSessionFactory().openSession();
-            session.getTransaction().begin();
-            Hall hall1 = (Hall) session.get(Hall.class, hall.getId());
-            Hall hall2 = (Hall) session.get(Hall.class, 6);
-//            Tour tor1 = (Tour) session.get(Tour.class, tour.getId());
-            tour.getHall().add(hall1);
-            tour.getHall().add(hall2);
-            session.save(tour);
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-            session.getTransaction().rollback();
-        } finally {
-            session.close();
-        }
-    }
-
     public void setHallsToTour(Set<Hall> halls, Tour id_tour){
         Session session = null;
         try {
