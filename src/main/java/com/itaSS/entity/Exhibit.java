@@ -111,7 +111,7 @@ public class Exhibit {
     }
 
     public String toString() {
-        return "Exhibit name: " + name + "\n";
+        return "Exhibit name: " + name + " Author name: " + author_name + "\n";
     }
 
 }

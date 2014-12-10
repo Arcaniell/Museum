@@ -54,14 +54,18 @@ public class Hall {
 
     public String toString() {
         StringBuilder sb =new StringBuilder();
-        sb.append("Name: ").append(name).append(" \n")
-            .append("Exhibits: \n");
-        for (Exhibit exhibit : exhibits) {
-            sb.append("\t").append(exhibit.getName()).append(" \n");
+        sb.append("Name: ").append(name).append(" \n");
+        if (exhibits.size() != 0) {
+            sb.append("Exhibits: \n");
+            for (Exhibit exhibit : exhibits) {
+                sb.append("\t").append(exhibit.getName()).append(" \n");
+            }
         }
-        sb.append("Tours: \n");
-        for (Tour tours : tour) {
-            sb.append("\t").append(tours.getName()).append(" \n");
+        if (tour.size() != 0) {
+            sb.append("Tours: \n");
+            for (Tour tours : tour) {
+                sb.append("\t").append(tours.getName()).append(" \n");
+            }
         }
         return sb.toString();
     }
