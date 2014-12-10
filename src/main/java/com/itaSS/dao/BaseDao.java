@@ -2,9 +2,11 @@ package com.itaSS.dao;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 public abstract class BaseDao<T, E extends Serializable> {
 
@@ -54,6 +56,15 @@ public abstract class BaseDao<T, E extends Serializable> {
         session.getTransaction().begin();
         session.delete(entity);
         session.getTransaction().commit();
+    }
+
+    public List<T> getSpecEntity(Set<Criterion> criterions) {
+        Session session = SessionFact.getSessionFactory().openSession();
+        Criteria criteria = session.createCriteria(entityClass);
+        for (Criterion criterion : criterions) {
+            criteria.add(criterion);
+        }
+        return criteria.list();
     }
 
 }

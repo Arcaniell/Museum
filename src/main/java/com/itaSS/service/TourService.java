@@ -8,7 +8,8 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 
-import static com.itaSS.utils.ConsoleInputReader.*;
+import static com.itaSS.utils.ConsoleInputReader.readDate;
+import static com.itaSS.utils.ConsoleInputReader.readLine;
 
 public class TourService extends BaseService {
 

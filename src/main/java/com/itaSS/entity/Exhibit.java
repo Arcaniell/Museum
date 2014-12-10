@@ -15,12 +15,12 @@ public class Exhibit {
     private Integer id;
     @Column(nullable = false)
     private String name;
-    @Column
-    private Date arrive_date;
-    @Column
-    private Date creation_date;
     @Column(nullable = false)
     private String author_name;
+    @Column(nullable = false)
+    private Date creation_date;
+    @Column
+    private Date arrive_date;
     @Column
     private Materials material;
     @Column

@@ -51,9 +51,10 @@ public final class DataGenerators {
         MAPPED_EX_NAMES.remove(exName);
         exhibit.setName(exName);
         Calendar calendar = Calendar.getInstance();
-        calendar.set(randomizer.nextInt(55) + 1955, 1 + counter, 10 + counter);
+        calendar.set(randomizer.nextInt(25) + 1980, randomizer.nextInt(12) + 1, randomizer.nextInt(28) + 1);
         exhibit.setArrive_date(new Date(calendar.getTime().getTime()));
-        calendar.set(randomizer.nextInt(500) + 1500, 1 + counter, 10 + counter);
+        calendar.set(randomizer.nextInt(500) + 1500, randomizer.nextInt(12) + 1, randomizer.nextInt(28) + 1);
+        exhibit.setCreation_date(new Date(calendar.getTime().getTime()));
         exhibit.setAuthor_name(AUTHORS_NAME[randomizer.nextInt(AUTHORS_NAME.length)]);
         exhibit.setMaterial(getRandVal(Materials.values()));
         exhibit.setTechnic(getRandVal(Technics.values()));

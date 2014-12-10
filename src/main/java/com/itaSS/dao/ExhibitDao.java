@@ -33,8 +33,8 @@ public class ExhibitDao extends BaseDao<Exhibit, Integer> {
         if (!args[argCounter].equals("-")) {
             criteria.add(Restrictions.like("author_name", args[argCounter] + "%"));
         }
-        List<Exhibit> results;
-        results = criteria.list();
-        return results;
+//        List<Exhibit> results;
+//        results = criteria.list();
+        return criteria.list();
     }
 }

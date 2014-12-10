@@ -1,19 +1,17 @@
 package com.itaSS.interact;
 
-import com.itaSS.dao.*;
+import com.itaSS.dao.SessionFact;
 import com.itaSS.entity.Exhibit;
 import com.itaSS.entity.Hall;
-import com.itaSS.entity.Tour;
 import com.itaSS.service.ExhibitService;
 import com.itaSS.service.HallService;
 import com.itaSS.service.TourService;
 import com.itaSS.service.WorkerService;
 import com.itaSS.utils.ConsoleInputReader;
 
-import static com.itaSS.utils.ConsoleInputReader.*;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+
+import static com.itaSS.utils.ConsoleInputReader.selectEnum;
 
 public class Console {
 
@@ -31,11 +29,8 @@ public class Console {
             setExhibitToHall();
         } else if (selected == Actions.SET_HALLS_TO_TOUR) {
             setHallsToTour();
-        } else if (selected == Actions.SET_WORKER_TO_HALL) {
-            setWorkerToHall();
         }
     }
-    //TODO Do all that stuff by services
 
     private void addExhibit() {
         ExhibitService exhibitService = new ExhibitService();
