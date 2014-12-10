@@ -17,6 +17,8 @@ public class Exhibit {
     private String name;
     @Column
     private Date arrive_date;
+    @Column
+    private Date creation_date;
     @Column(nullable = false)
     private String author_name;
     @Column
@@ -66,6 +68,14 @@ public class Exhibit {
 
     public void setArrive_date(Date arrive_date) {
         this.arrive_date = arrive_date;
+    }
+
+    public Date getCreation_date() {
+        return creation_date;
+    }
+
+    public void setCreation_date(Date creation_date) {
+        this.creation_date = creation_date;
     }
 
     public String getAuthor_name() {
