@@ -5,7 +5,7 @@ import com.itaSS.entity.Exhibit;
 import com.itaSS.entity.Hall;
 import com.itaSS.entity.enumInfo.Materials;
 import com.itaSS.entity.enumInfo.Technics;
-import com.itaSS.utils.CriterionBuilder;
+import com.itaSS.service.utils.CriterionBuilder;
 import org.hibernate.criterion.Criterion;
 
 import java.sql.Date;
@@ -62,7 +62,7 @@ public class ExhibitService extends BaseService {
         final int zero_result = 0;
         final String searchOptions = "Enter criteria for Exhibit search in following format (\"-\" for skip): ";
         System.out.println(searchOptions);
-        System.out.println("\texhibit_name author_name arrive_date creation_date material technic");
+        System.out.println("\texhibit_name author_name creation_date arrive_date ");
         ExhibitDao exhibitDao = new ExhibitDao(Exhibit.class);
         String input = readLine();
         Set<Criterion> criterias = CriterionBuilder.getExhibitCriterion(input);

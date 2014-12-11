@@ -27,14 +27,12 @@ public final class ConsoleInputReader {
     }
 
     public static Date readDate() {
-        Date result;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
         try {
             String input = readLine();
             if (!input.equals("")) {
-                result = new Date(dateFormat.parse(input).getTime());
-                return result;
+                return new Date(dateFormat.parse(input).getTime());
             }
         } catch (ParseException e) {
             System.out.println("Parse err");
