@@ -14,11 +14,11 @@ public class Worker {
     @GeneratedValue
     private Integer id;
 
-    @Column(nullable = false)
-    String name;
+    @Column(name = "first_name", nullable = false)
+    String firstName;
 
-    @Column(nullable = false)
-    String surname;
+    @Column(name = "last_name", nullable = false)
+    String lastName;
 
     @Column
     BigDecimal salary;
@@ -37,20 +37,20 @@ public class Worker {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public BigDecimal getSalary() {

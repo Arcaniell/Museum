@@ -7,6 +7,7 @@ import com.itaSS.utils.ConsoleInputReader;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -20,7 +21,7 @@ public final class CriterionBuilder {
 
     public static Set<Criterion> getHallCriterion(String input) {
         Set<Criterion> result = new HashSet<>();
-        String[]args = input.split(" ");
+        String[] args = input.split(" ");
         argCounter = 0;
         if (!args[argCounter].equals("-")) {
             result.add(getStrokeCriterion("name", args[argCounter]));
@@ -30,7 +31,7 @@ public final class CriterionBuilder {
 
     public static Set<Criterion> getExhibitCriterion(String input) {
         Set<Criterion> result = new HashSet<>();
-        String[]args = input.split(" ");
+        String[] args = input.split(" ");
         argCounter = 0;
         if (!args[argCounter].equals("-")) {
             result.add(getStrokeCriterion("name", args[argCounter]));
@@ -62,7 +63,7 @@ public final class CriterionBuilder {
 
     public static Set<Criterion> getTourCriterion(String input) {
         Set<Criterion> result = new HashSet<>();
-        String[]args = input.split(" ");
+        String[] args = input.split(" ");
         argCounter = 0;
         if (!args[argCounter].equals("-")) {
             result.add(getStrokeCriterion("tour_name", args[argCounter]));
@@ -80,14 +81,18 @@ public final class CriterionBuilder {
 
     public static Set<Criterion> getWorkerCriterion(String input) {
         Set<Criterion> result = new HashSet<>();
-        String[]args = input.split(" ");
+        String[] args = input.split(" ");
         argCounter = 0;
         if (!args[argCounter].equals("-")) {
-            result.add(getStrokeCriterion("name", args[argCounter]));
+            result.add(getStrokeCriterion("fist_name", args[argCounter]));
         }
         argCounter++;
         if (!args[argCounter].equals("-")) {
-            result.add(getStrokeCriterion("surname", args[argCounter]));
+            result.add(getStrokeCriterion("last_name", args[argCounter]));
+        }
+        argCounter++;
+        if(!args[argCounter].equals("-")) {
+            result.add(getNumberCriterion("salary", args[argCounter]));
         }
         argCounter++;
         if (!args[argCounter].equals("-")) {
@@ -115,6 +120,10 @@ public final class CriterionBuilder {
     private static Criterion getEnumCriterion(String column, Class<? extends Enum<?>> type) {
         Enum<?> obj = ConsoleInputReader.selectEnum(type);
         return Restrictions.eq(column, obj);
+    }
+
+    private static Criterion getNumberCriterion(String colum, String input) {
+        return Restrictions.eq(colum, new BigDecimal(input));
     }
 
 }

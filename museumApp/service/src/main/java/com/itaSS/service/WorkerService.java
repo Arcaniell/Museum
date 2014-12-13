@@ -22,9 +22,13 @@ public class WorkerService extends BaseService{
         System.out.println("Please enter required info: ");
         Worker worker = new Worker();
 
-        System.out.println("\tWorker name");
+        System.out.println("\tWorker first name: ");
         String name = readLine();
-        worker.setName(name);
+        worker.setFirstName(name);
+
+        System.out.println("\tWorker last name: ");
+        name = readLine();
+        worker.setLastName(name);
 
         System.out.println("Enter additional info, or leave it blank: ");
         System.out.println("\tWorker salary: ");
@@ -32,6 +36,7 @@ public class WorkerService extends BaseService{
         if (!input.equals("")) {
             worker.setSalary(new BigDecimal(input));
         }
+
         System.out.println("\tPosition: ");
         Positions position = (Positions) selectEnum(Positions.class);
         if (position != null) {

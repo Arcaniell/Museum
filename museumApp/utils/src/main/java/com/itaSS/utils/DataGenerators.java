@@ -27,8 +27,8 @@ public final class DataGenerators {
     private static final String[] HALLS_NAME = {"A", "B", "C", "D", "E", "F", "G"};
     private static final Set<String> MAPPED_HALL_NAMES = new HashSet<>();
     private static final String[] TOURS_NAME = {"Dino", "WW", "Hirosima", "Ukraine", "Poland", "Antlantida"};
-    private static final String[] WORKERS_NAME = {"Ania", "Petro", "Kolia", "Yan", "Arbuz", "Dinka", "Plant"};
-    private static final String[] WORKERS_SURNAME = {"Abramovich", "Yanucovich", "Yaceniuk", "Poroshenko",
+    private static final String[] WORKERS_FIRST_NAME = {"Ania", "Petro", "Kolia", "Yan", "Arbuz", "Dinka", "Plant"};
+    private static final String[] WORKERS_LAST_NAME = {"Abramovich", "Yanucovich", "Yaceniuk", "Poroshenko",
             "Samsung"};
     static {
         for (String name : EXHIBITS_NAME) {
@@ -87,8 +87,8 @@ public final class DataGenerators {
 
     public static Worker genWorker() {
         Worker worker = new Worker();
-        worker.setName(WORKERS_NAME[randomizer.nextInt(WORKERS_NAME.length)]);
-        worker.setSurname(WORKERS_SURNAME[randomizer.nextInt(WORKERS_SURNAME.length)]);
+        worker.setFirstName(WORKERS_FIRST_NAME[randomizer.nextInt(WORKERS_FIRST_NAME.length)]);
+        worker.setLastName(WORKERS_LAST_NAME[randomizer.nextInt(WORKERS_LAST_NAME.length)]);
         worker.setPosition(getRandVal(Positions.values()));
         worker.setSalary(new BigDecimal("10.5"));
         return worker;
@@ -96,7 +96,7 @@ public final class DataGenerators {
 
     public static List<Worker> genWorkersList() {
         List<Worker> workers = new ArrayList<>();
-        for (int i = 0; i < WORKERS_NAME.length; i++) {
+        for (int i = 0; i < WORKERS_FIRST_NAME.length; i++) {
             workers.add(genWorker());
         }
         return workers;
