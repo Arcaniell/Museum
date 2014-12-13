@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class BaseWork {
+public class Job {
     @Id
     @Column
     @GeneratedValue
