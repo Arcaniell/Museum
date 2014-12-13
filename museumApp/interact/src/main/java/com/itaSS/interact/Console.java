@@ -15,58 +15,38 @@ import static com.itaSS.utils.ConsoleInputReader.selectEnum;
 
 public class Console {
 
+    private ExhibitService exhibitService = new ExhibitService();
+    private HallService hallService = new HallService();
+    private TourService tourService = new TourService();
+    private WorkerService workerService = new WorkerService();
+
     public void run() {
         Enum<Actions> selected = (Actions) selectEnum(Actions.class);
         if (selected == Actions.ADD_EXHIBIT) {
-            addExhibit();
+            exhibitService.addExhibit();
         } else if (selected == Actions.UPDATE_EXHIBIT) {
-            updateExhibit();
+            exhibitService.updateExhibit();
         } else if (selected == Actions.ADD_HALL) {
-            addHall();
+            hallService.addHall();
         } else if (selected == Actions.UPDATE_HALL) {
-            updateExhibit();
+            hallService.updateHall();
         } else if (selected == Actions.ADD_TOUR) {
-            addTour();
+            tourService.addTour();
         } else if (selected == Actions.UPDATE_TOUR) {
-            updateExhibit();
+            tourService.updateTour();
         }  else if (selected == Actions.ADD_WORKER) {
-            addWorker();
+            workerService.addWorker();
         } else if (selected == Actions.UPDATE_WORKER) {
-            updateExhibit();
+            workerService.updateWorker();
         }  else if (selected == Actions.SET_EXHIBIT_TO_HALL) {
             setExhibitToHall();
         } else if (selected == Actions.SET_HALLS_TO_TOUR) {
-            setHallsToTour();
+            hallService.setHallsToTour();
         } else if (selected == Actions.SET_WORKER_TO_HALL) {
-            setWorkerToHall();
+            workerService.setWorkerToHall();
         } else if (selected == Actions.SET_WORKER_TO_TOUR) {
-            setWorkerToTour();
+            workerService.setWorkerToTour();
         }
-    }
-
-    private void addExhibit() {
-        ExhibitService exhibitService = new ExhibitService();
-        exhibitService.addExhibit();
-    }
-
-    private void updateExhibit() {
-        ExhibitService exhibitService = new ExhibitService();
-        exhibitService.updateExhibit();
-    }
-
-    private void addHall() {
-        HallService hallService = new HallService();
-        hallService.addHall();
-    }
-
-    private void addTour() {
-        TourService tourService = new TourService();
-        tourService.addTour();
-    }
-
-    private void addWorker() {
-        WorkerService workerService = new WorkerService();
-        workerService.addWorker();
     }
 
     private void setExhibitToHall() {
@@ -77,21 +57,6 @@ public class Console {
         Hall hall = hallService.searchHall();
 
         exhibitService.setExhibitToHall(exhibit, hall);
-    }
-
-    private void setHallsToTour() {
-        HallService hallService = new HallService();
-        hallService.setHallsToTour();
-    }
-
-    private void setWorkerToHall() {
-        WorkerService workerService = new WorkerService();
-        workerService.setWorkerToHall();
-    }
-
-    private void setWorkerToTour() {
-        WorkerService workerService = new WorkerService();
-        workerService.setWorkerToTour();
     }
 
     public void close() {
