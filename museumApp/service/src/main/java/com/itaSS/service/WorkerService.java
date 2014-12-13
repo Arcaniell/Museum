@@ -17,11 +17,27 @@ import static com.itaSS.utils.ConsoleInputReader.selectEnum;
 
 public class WorkerService extends BaseService{
 
-    public void addWorker() {
-        //TODO check on THIS LEVEL for correct input
-        System.out.println("Please enter required info: ");
-        Worker worker = new Worker();
+    WorkerDao workerDao = new WorkerDao(Worker.class);
 
+    public void addWorker() {
+        Worker worker = enterWorkerInfo();
+        workerDao.create(worker);
+    }
+
+    public void updateWorker() {
+        Worker workerOld = searchWorker();
+        workerDao.update(enterWorkerInfo(workerOld));
+    }
+
+    private Worker enterWorkerInfo() {
+        return enterWorkerInfo(null);
+    }
+
+    private Worker enterWorkerInfo(Worker worker) {
+        System.out.println("Please enter required info: ");
+        if (worker == null) {
+            worker = new Worker();
+        }
         System.out.println("\tWorker first name: ");
         String name = readLine();
         worker.setFirstName(name);
@@ -42,12 +58,10 @@ public class WorkerService extends BaseService{
         if (position != null) {
             worker.setPosition(position);
         }
-        WorkerDao workerDao = new WorkerDao(Worker.class);
-        workerDao.create(worker);
+        return worker;
     }
 
     public Worker searchWorker() {
-        WorkerDao workerDao = new WorkerDao(Worker.class);
         System.out.println(searchOptions);
         System.out.println("\tfirst_name last_name salary position");
         String input = readLine();
@@ -78,7 +92,6 @@ public class WorkerService extends BaseService{
         HallService hallService = new HallService();
         Hall hall = hallService.searchHall();
 
-        WorkerDao workerDao = new WorkerDao(Worker.class);
         workerDao.setWorkerToJob(worker, hall);
     }
 
