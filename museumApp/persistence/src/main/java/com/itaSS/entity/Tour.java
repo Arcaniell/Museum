@@ -7,32 +7,23 @@ import java.util.Set;
 
 @Entity
 @Table
-public class Tour {
-    @Id
-    @Column
-    @GeneratedValue
-    private Integer id;
+@PrimaryKeyJoinColumn(name = "id")
+public class Tour extends Job{
+
     @Column(nullable = false)
     private String tour_name;
+
     @Column
     private Date begin_Date;
+
     @Column
     private Date end_Date;
+
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name="tour_hall",
         joinColumns={@JoinColumn(name="tour_id")},
         inverseJoinColumns={@JoinColumn(name="hall_id")})
     Set<Hall> hall= new HashSet<>();
-    @OneToOne
-    Job job;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getTour_name() {
         return tour_name;
@@ -64,14 +55,6 @@ public class Tour {
 
     public void setHall(Set<Hall> hall) {
         this.hall = hall;
-    }
-
-    public Job getJob() {
-        return job;
-    }
-
-    public void setJob(Job job) {
-        this.job = job;
     }
 
     public String toString() {

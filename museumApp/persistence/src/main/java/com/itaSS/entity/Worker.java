@@ -8,18 +8,24 @@ import java.math.BigDecimal;
 @Entity
 @Table
 public class Worker {
+
     @Id
     @Column
     @GeneratedValue
     private Integer id;
+
     @Column(nullable = false)
     String name;
+
     @Column(nullable = false)
     String surname;
+
     @Column
     BigDecimal salary;
+
     @Column
     Positions position;;
+
     @OneToOne
     Job job;
 

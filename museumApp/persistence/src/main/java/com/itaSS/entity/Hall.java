@@ -6,29 +6,19 @@ import java.util.Set;
 
 @Entity
 @Table
-public class Hall {
-    @Id
-    @Column
-    @GeneratedValue
-    private Integer id;
+@PrimaryKeyJoinColumn(name = "id")
+public class Hall extends Job{
+
     @Column(nullable = false)
     private String name;
+
     @ManyToMany(mappedBy = "hall")
     private Set<Tour> tour = new HashSet<>();
+
     @OneToMany(mappedBy = "hall", cascade = CascadeType.PERSIST)
     private Set<Exhibit> exhibits;
-    @OneToOne
-    Job job;
 
     public Hall() { }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Set<Exhibit> getExhibits() {
         return exhibits;
@@ -52,14 +42,6 @@ public class Hall {
 
     public void setTour(Set<Tour> tour) {
         this.tour = tour;
-    }
-
-    public Job getJob() {
-        return job;
-    }
-
-    public void setJob(Job job) {
-        this.job = job;
     }
 
     public String toString() {

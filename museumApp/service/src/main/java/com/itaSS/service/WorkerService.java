@@ -72,7 +72,7 @@ public class WorkerService extends BaseService{
         Hall hall = hallService.searchHall();
 
         WorkerDao workerDao = new WorkerDao(Worker.class);
-        workerDao.setWorkerToHall(worker, hall);
+        workerDao.setWorkerToJob(worker, hall);
     }
 
     public void setWorkerToTour() {
@@ -82,6 +82,6 @@ public class WorkerService extends BaseService{
         Tour tour = tourService.searchTour();
 
         WorkerDao workerDao = new WorkerDao(Worker.class);
-        workerDao.setWorkerToTour(worker, tour);
+//        workerDao.setWorkerToJob(worker, tour);
     }
 }

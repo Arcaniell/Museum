@@ -4,13 +4,13 @@ import javax.persistence.*;
 
 @Entity
 @Table
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Job {
+
     @Id
-    @Column
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "id")
     private Integer id;
-    @OneToOne
-    Worker worker;
 
     public Integer getId() {
         return id;
@@ -20,12 +20,5 @@ public class Job {
         this.id = id;
     }
 
-    public Worker getWorker() {
-        return worker;
-    }
-
-    public void setWorker(Worker worker) {
-        this.worker = worker;
-    }
 }
 
