@@ -16,27 +16,16 @@ import static com.itaSS.utils.ConsoleInputReader.readLine;
 
 public class TourService extends BaseService {
 
+    TourDao tourDao = new TourDao(Tour.class);
+
     public void addTour() {
-        System.out.println("Please enter required info: ");
-        Tour tour = new Tour();
-        System.out.println("\tTour name");
-        String name = readLine();
-        tour.setTour_name(name);
-
-        System.out.println("Enter additional info, or leave it blank: ");
-        System.out.println("\tBegin Date (YYYY-MM-DD)");
-        Date infoDate = readDate();
-        if (infoDate  != null) {
-            tour.setBegin_Date(infoDate);
-        }
-        System.out.println("\tEnding Date (YYYY-MM-DD)");
-        infoDate = readDate();
-        if (infoDate   != null) {
-            tour.setEnd_Date(infoDate);
-        }
-
-        TourDao tourDao = new TourDao(Tour.class);
+        Tour tour = enterTourInfo();
         tourDao.create(tour);
+    }
+
+    public void updateTour() {
+        Tour oldTour = searchTour();
+        tourDao.update(enterTourInfo(oldTour));
     }
 
     public Tour searchTour() {
@@ -67,6 +56,33 @@ public class TourService extends BaseService {
     public void setHallsToTour(Set<Hall> halls, Tour id_tour) {
         TourDao tourDao = new TourDao(Tour.class);
         tourDao.setHallsToTour(halls, id_tour);
+    }
+
+    private Tour enterTourInfo() {
+        return enterTourInfo(null);
+    }
+
+    private Tour enterTourInfo(Tour tour) {
+        System.out.println("Please enter required info: ");
+        if (tour == null) {
+            tour = new Tour();
+        }
+        System.out.println("\tTour name");
+        String name = readLine();
+        tour.setTour_name(name);
+
+        System.out.println("Enter additional info, or leave it blank: ");
+        System.out.println("\tBegin Date (YYYY-MM-DD)");
+        Date infoDate = readDate();
+        if (infoDate  != null) {
+            tour.setBegin_Date(infoDate);
+        }
+        System.out.println("\tEnding Date (YYYY-MM-DD)");
+        infoDate = readDate();
+        if (infoDate   != null) {
+            tour.setEnd_Date(infoDate);
+        }
+        return tour;
     }
 
 }
