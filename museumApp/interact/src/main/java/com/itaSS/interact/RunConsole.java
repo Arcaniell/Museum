@@ -15,7 +15,7 @@ public class RunConsole {
     }
 
     public static void main(String[] args) {
-        DataGenerators.generateData();
+//        DataGenerators.generateData();
         RunConsole runConsole = new RunConsole();
         JobDao jobDao = new JobDao();
         //=======

@@ -71,7 +71,6 @@ public class Console {
         hallService.setHallsToTour();
     }
 
-    //TODO Ask Nazar for base class for some Entities
     private void setWorkerToHall() {
         WorkerService workerService = new WorkerService();
         workerService.setWorkerToHall();

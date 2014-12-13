@@ -18,6 +18,7 @@ import static com.itaSS.utils.ConsoleInputReader.selectEnum;
 public class WorkerService extends BaseService{
 
     public void addWorker() {
+        //TODO check on THIS LEVEL for correct input
         System.out.println("Please enter required info: ");
         Worker worker = new Worker();
 
@@ -82,6 +83,6 @@ public class WorkerService extends BaseService{
         Tour tour = tourService.searchTour();
 
         WorkerDao workerDao = new WorkerDao(Worker.class);
-//        workerDao.setWorkerToJob(worker, tour);
+        workerDao.setWorkerToJob(worker, tour);
     }
 }
