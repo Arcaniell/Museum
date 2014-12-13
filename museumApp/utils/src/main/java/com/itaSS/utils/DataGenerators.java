@@ -52,10 +52,10 @@ public final class DataGenerators {
         exhibit.setName(exName);
         Calendar calendar = Calendar.getInstance();
         calendar.set(randomizer.nextInt(25) + 1980, randomizer.nextInt(12) + 1, randomizer.nextInt(28) + 1);
-        exhibit.setArrive_date(new Date(calendar.getTime().getTime()));
+        exhibit.setArriveDate(new Date(calendar.getTime().getTime()));
         calendar.set(randomizer.nextInt(500) + 1500, randomizer.nextInt(12) + 1, randomizer.nextInt(28) + 1);
-        exhibit.setCreation_date(new Date(calendar.getTime().getTime()));
-        exhibit.setAuthor_name(AUTHORS_NAME[randomizer.nextInt(AUTHORS_NAME.length)]);
+        exhibit.setCreationDate(new Date(calendar.getTime().getTime()));
+        exhibit.setAuthorName(AUTHORS_NAME[randomizer.nextInt(AUTHORS_NAME.length)]);
         exhibit.setMaterial(getRandVal(Materials.values()));
         exhibit.setTechnic(getRandVal(Technics.values()));
         return exhibit;

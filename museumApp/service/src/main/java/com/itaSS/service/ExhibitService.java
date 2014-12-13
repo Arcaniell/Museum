@@ -22,7 +22,7 @@ public class ExhibitService extends BaseService {
         //TODO Check formats for names
         System.out.println("\tAuthor Name: ");
         String authorName = readLine();
-        exhibit.setAuthor_name(authorName);
+        exhibit.setAuthorName(authorName);
 
         System.out.println("\tExhibit Name: ");
         String exhibitName = readLine();
@@ -31,14 +31,14 @@ public class ExhibitService extends BaseService {
         System.out.println("\tCreation Date (YYYY-MM-DD)");
         Date creationDate = readDate();
         if (creationDate != null) {
-            exhibit.setCreation_date(creationDate);
+            exhibit.setCreationDate(creationDate);
         }
 
         System.out.println("Enter additional info, or leave it blank: ");
         System.out.println("\tArrival Date (YYYY-MM-DD)");
         Date arrivalDate = readDate();
         if (arrivalDate != null) {
-            exhibit.setArrive_date(arrivalDate);
+            exhibit.setArriveDate(arrivalDate);
         }
 
         System.out.println("\tMaterial: ");
@@ -58,9 +58,9 @@ public class ExhibitService extends BaseService {
     }
 
     public Exhibit searchExhibit() {
+        ExhibitDao exhibitDao = new ExhibitDao();
         System.out.println(searchOptions);
         System.out.println("\texhibit_name author_name creation_date arrive_date material technic");
-        ExhibitDao exhibitDao = new ExhibitDao();
         String input = readLine();
         Set<Criterion> criteria = CriterionBuilder.getExhibitCriterion(input);
         List<Exhibit> exhibits = exhibitDao.getSpecEntity(criteria);

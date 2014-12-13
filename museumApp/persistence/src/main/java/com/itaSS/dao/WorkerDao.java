@@ -21,7 +21,7 @@ public class WorkerDao extends BaseDao<Worker, Integer> {
             worker.setJob(job);
             session.getTransaction().commit();
         } catch (HibernateException e) {
-            System.err.println("Error adding Worker to Hall");
+            System.err.println("Error adding Worker to Job");
             e.printStackTrace();
         }
     }

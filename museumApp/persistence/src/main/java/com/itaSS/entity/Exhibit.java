@@ -15,12 +15,12 @@ public class Exhibit {
     private Integer id;
     @Column(nullable = false)
     private String name;
-    @Column(nullable = false)
-    private String author_name;
-    @Column(nullable = false)
-    private Date creation_date;
-    @Column
-    private Date arrive_date;
+    @Column(name = "author_name", nullable = false)
+    private String authorName;
+    @Column(name = "creation_date", nullable = false)
+    private Date creationDate;
+    @Column(name = "arrive_date")
+    private Date arriveDate;
     @Column
     private Materials material;
     @Column
@@ -34,17 +34,13 @@ public class Exhibit {
 
     public boolean equals(Exhibit exhibit) {
         return this.name.equals(exhibit.getName())
-                && this.arrive_date.equals(exhibit.getArrive_date())
-                && this.author_name.equals(exhibit.getAuthor_name())
+                && this.arriveDate.equals(exhibit.getArriveDate())
+                && this.authorName.equals(exhibit.getAuthorName())
                 && this.material.equals(exhibit.getMaterial())
                 && this.technic.equals(exhibit.getTechnic());
     }
 
     public Exhibit() {}
-
-    public Exhibit(Hall hall) {
-        this.hall = hall;
-    }
 
     public Integer getId() {
         return id;
@@ -62,28 +58,28 @@ public class Exhibit {
         this.name = name;
     }
 
-    public Date getCreation_date() {
-        return creation_date;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setCreation_date(Date creation_date) {
-        this.creation_date = creation_date;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public Date getArrive_date() {
-        return arrive_date;
+    public Date getArriveDate() {
+        return arriveDate;
     }
 
-    public void setArrive_date(Date arrive_date) {
-        this.arrive_date = arrive_date;
+    public void setArriveDate(Date arriveDate) {
+        this.arriveDate = arriveDate;
     }
 
-    public String getAuthor_name() {
-        return author_name;
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public void setAuthor_name(String author_name) {
-        this.author_name = author_name;
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 
     public Materials getMaterial() {
@@ -112,10 +108,10 @@ public class Exhibit {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Exhibit name: ").append(name).append(" Author name: ").append(author_name);
-        sb.append(" Creation date: ").append(creation_date);
-        if (arrive_date != null) {
-            sb.append(" Arrival date: ").append(arrive_date);
+        sb.append("Exhibit name: ").append(name).append(" Author name: ").append(authorName);
+        sb.append(" Creation date: ").append(creationDate);
+        if (arriveDate != null) {
+            sb.append(" Arrival date: ").append(arriveDate);
         }
         if (material != null) {
             sb.append(" Material: ").append(material);

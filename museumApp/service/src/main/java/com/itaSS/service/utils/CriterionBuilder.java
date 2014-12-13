@@ -84,11 +84,11 @@ public final class CriterionBuilder {
         String[] args = input.split(" ");
         argCounter = 0;
         if (!args[argCounter].equals("-")) {
-            result.add(getStrokeCriterion("fist_name", args[argCounter]));
+            result.add(getStrokeCriterion("firstName", args[argCounter]));
         }
         argCounter++;
         if (!args[argCounter].equals("-")) {
-            result.add(getStrokeCriterion("last_name", args[argCounter]));
+            result.add(getStrokeCriterion("lastName", args[argCounter]));
         }
         argCounter++;
         if(!args[argCounter].equals("-")) {
@@ -122,8 +122,8 @@ public final class CriterionBuilder {
         return Restrictions.eq(column, obj);
     }
 
-    private static Criterion getNumberCriterion(String colum, String input) {
-        return Restrictions.eq(colum, new BigDecimal(input));
+    private static Criterion getNumberCriterion(String column, String input) {
+        return Restrictions.eq(column, new BigDecimal(input));
     }
 
 }

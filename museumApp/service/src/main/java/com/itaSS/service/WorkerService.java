@@ -47,12 +47,13 @@ public class WorkerService extends BaseService{
     }
 
     public Worker searchWorker() {
-        System.out.println(searchOptions);
-        System.out.println("\tfirst_name last_name position salary");
         WorkerDao workerDao = new WorkerDao(Worker.class);
+        System.out.println(searchOptions);
+        System.out.println("\tfirst_name last_name salary position");
         String input = readLine();
         Set<Criterion> criteria = CriterionBuilder.getWorkerCriterion(input);
         List<Worker> workers = workerDao.getSpecEntity(criteria);
+
         int result_size = workers.size();
         while (result_size == zero_result || result_size > many_results ) {
             if (result_size == zero_result) {
