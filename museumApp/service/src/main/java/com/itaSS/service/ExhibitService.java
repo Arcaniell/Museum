@@ -16,9 +16,57 @@ import static com.itaSS.utils.ConsoleInputReader.*;
 
 public class ExhibitService extends BaseService {
 
+    ExhibitDao exhibitDao = new ExhibitDao();
+
     public void addExhibit() {
+        Exhibit exhibit = enterExhibit();
+        exhibitDao.create(exhibit);
+    }
+
+    public void updateExhibit() {
+        Exhibit exhibitOld = searchExhibit();
+        exhibitDao.update(enterExhibit(exhibitOld));
+
+    }
+
+    public Exhibit searchExhibit() {
+        System.out.println(searchOptions);
+        System.out.println("\texhibit_name author_name creation_date arrive_date material technic");
+        String input = readLine();
+        Set<Criterion> criteria = CriterionBuilder.getExhibitCriterion(input);
+        List<Exhibit> exhibits = exhibitDao.getSpecEntity(criteria);
+        int result_size = exhibits.size();
+        while (result_size == zero_result || result_size > many_results ) {
+            if (result_size == zero_result) {
+                System.out.println("No mathces found, try again!");
+                System.out.println(searchOptions);
+            } else {
+                System.out.println(exhibits);
+                System.out.println("More then single result, enter search criteria again: ");
+                System.out.println(searchOptions);
+            }
+            input = readLine();
+            criteria = CriterionBuilder.getExhibitCriterion(input);
+            exhibits = exhibitDao.getSpecEntity(criteria);
+            result_size = exhibits.size();
+        }
+        return exhibits.get(firstElement);
+    }
+
+    public void setExhibitToHall(Exhibit exhibit, Hall hall) {
+        ExhibitDao exhibitDao = new ExhibitDao();
+        exhibitDao.setExhibitToHall(exhibit, hall);
+    }
+
+    private Exhibit enterExhibit() {
+        return enterExhibit(null);
+    }
+
+    private Exhibit enterExhibit(Exhibit exhibit) {
         System.out.println("Please enter required info: ");
-        Exhibit exhibit = new Exhibit();
+        if (exhibit == null) {
+            exhibit = new Exhibit();
+        }
         //TODO Check formats for names
         System.out.println("\tAuthor Name: ");
         String authorName = readLine();
@@ -52,38 +100,6 @@ public class ExhibitService extends BaseService {
         if (technics != null) {
             exhibit.setTechnic(technics);
         }
-
-        ExhibitDao exhibitDao = new ExhibitDao();
-        exhibitDao.create(exhibit);
-    }
-
-    public Exhibit searchExhibit() {
-        ExhibitDao exhibitDao = new ExhibitDao();
-        System.out.println(searchOptions);
-        System.out.println("\texhibit_name author_name creation_date arrive_date material technic");
-        String input = readLine();
-        Set<Criterion> criteria = CriterionBuilder.getExhibitCriterion(input);
-        List<Exhibit> exhibits = exhibitDao.getSpecEntity(criteria);
-        int result_size = exhibits.size();
-        while (result_size == zero_result || result_size > many_results ) {
-            if (result_size == zero_result) {
-                System.out.println("No mathces found, try again!");
-                System.out.println(searchOptions);
-            } else {
-                System.out.println(exhibits);
-                System.out.println("More then single result, enter search criteria again: ");
-                System.out.println(searchOptions);
-            }
-            input = readLine();
-            criteria = CriterionBuilder.getExhibitCriterion(input);
-            exhibits = exhibitDao.getSpecEntity(criteria);
-            result_size = exhibits.size();
-        }
-        return exhibits.get(firstElement);
-    }
-
-    public void setExhibitToHall(Exhibit exhibit, Hall hall) {
-        ExhibitDao exhibitDao = new ExhibitDao();
-        exhibitDao.setExhibitToHall(exhibit, hall);
+        return exhibit;
     }
 }

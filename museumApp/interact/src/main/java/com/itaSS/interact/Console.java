@@ -19,13 +19,21 @@ public class Console {
         Enum<Actions> selected = (Actions) selectEnum(Actions.class);
         if (selected == Actions.ADD_EXHIBIT) {
             addExhibit();
+        } else if (selected == Actions.UPDATE_EXHIBIT) {
+            updateExhibit();
         } else if (selected == Actions.ADD_HALL) {
             addHall();
+        } else if (selected == Actions.UPDATE_HALL) {
+            updateExhibit();
         } else if (selected == Actions.ADD_TOUR) {
             addTour();
-        } else if (selected == Actions.ADD_WORKER) {
+        } else if (selected == Actions.UPDATE_TOUR) {
+            updateExhibit();
+        }  else if (selected == Actions.ADD_WORKER) {
             addWorker();
-        } else if (selected == Actions.SET_EXHIBIT_TO_HALL) {
+        } else if (selected == Actions.UPDATE_WORKER) {
+            updateExhibit();
+        }  else if (selected == Actions.SET_EXHIBIT_TO_HALL) {
             setExhibitToHall();
         } else if (selected == Actions.SET_HALLS_TO_TOUR) {
             setHallsToTour();
@@ -39,6 +47,11 @@ public class Console {
     private void addExhibit() {
         ExhibitService exhibitService = new ExhibitService();
         exhibitService.addExhibit();
+    }
+
+    private void updateExhibit() {
+        ExhibitService exhibitService = new ExhibitService();
+        exhibitService.updateExhibit();
     }
 
     private void addHall() {
