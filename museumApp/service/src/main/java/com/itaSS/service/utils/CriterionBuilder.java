@@ -1,22 +1,37 @@
 package com.itaSS.service.utils;
 
+import com.itaSS.entity.enumInfo.Materials;
+import com.itaSS.entity.enumInfo.Positions;
+import com.itaSS.entity.enumInfo.Technics;
+import com.itaSS.utils.ConsoleInputReader;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.Set;
 
-import java.sql.Date;
-
 public final class CriterionBuilder {
+
+    private static int argCounter;
+
+    public static Set<Criterion> getHallCriterion(String input) {
+        Set<Criterion> result = new HashSet<>();
+        String[]args = input.split(" ");
+        argCounter = 0;
+        if (!args[argCounter].equals("-")) {
+            result.add(getStrokeCriterion("name", args[argCounter]));
+        }
+        return result;
+    }
 
     public static Set<Criterion> getExhibitCriterion(String input) {
         Set<Criterion> result = new HashSet<>();
         String[]args = input.split(" ");
-        int argCounter = 0;
+        argCounter = 0;
         if (!args[argCounter].equals("-")) {
             result.add(getStrokeCriterion("name", args[argCounter]));
         }
@@ -34,11 +49,49 @@ public final class CriterionBuilder {
         }
         argCounter++;
         if (!args[argCounter].equals("-")) {
-            result.add(Restrictions.like("material", args[argCounter] + "%"));
+            System.out.println("Select material:");
+            result.add(getEnumCriterion("material", Materials.class));
         }
         argCounter++;
         if (!args[argCounter].equals("-")) {
-            result.add(Restrictions.like("technic", args[argCounter] + "%"));
+            System.out.println("Select technic:");
+            result.add(getEnumCriterion("technic", Technics.class));
+        }
+        return result;
+    }
+
+    public static Set<Criterion> getTourCriterion(String input) {
+        Set<Criterion> result = new HashSet<>();
+        String[]args = input.split(" ");
+        argCounter = 0;
+        if (!args[argCounter].equals("-")) {
+            result.add(getStrokeCriterion("tour_name", args[argCounter]));
+        }
+        argCounter++;
+        if (!args[argCounter].equals("-")) {
+            result.add(getDateCriterion("begin_Date", args[argCounter]));
+        }
+        argCounter++;
+        if (!args[argCounter].equals("-")) {
+            result.add(getDateCriterion("end_Date", args[argCounter]));
+        }
+        return result;
+    }
+
+    public static Set<Criterion> getWorkerCriterion(String input) {
+        Set<Criterion> result = new HashSet<>();
+        String[]args = input.split(" ");
+        argCounter = 0;
+        if (!args[argCounter].equals("-")) {
+            result.add(getStrokeCriterion("name", args[argCounter]));
+        }
+        argCounter++;
+        if (!args[argCounter].equals("-")) {
+            result.add(getStrokeCriterion("surname", args[argCounter]));
+        }
+        argCounter++;
+        if (!args[argCounter].equals("-")) {
+            result.add(getEnumCriterion("position", Positions.class));
         }
         return result;
     }
@@ -59,9 +112,9 @@ public final class CriterionBuilder {
         return criterion;
     }
 
-    private static Criterion getEnumCriterion(String column) {
-
-        return null;
+    private static Criterion getEnumCriterion(String column, Class<? extends Enum<?>> type) {
+        Enum<?> obj = ConsoleInputReader.selectEnum(type);
+        return Restrictions.eq(column, obj);
     }
 
 }

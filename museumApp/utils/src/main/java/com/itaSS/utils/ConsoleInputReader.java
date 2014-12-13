@@ -50,7 +50,7 @@ public final class ConsoleInputReader {
         Enum<?> material;
         String input = readLine();
         if (!input.equals("") && checkMenuSelect(input)
-                && (Integer.valueOf(input) < type.getEnumConstants().length)) {
+                && (Integer.valueOf(input) <= type.getEnumConstants().length)) {
             int selected = Integer.valueOf(input) - 1;
             material = Arrays.asList(type.getEnumConstants()).get(selected);
             return material;

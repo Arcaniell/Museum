@@ -104,12 +104,12 @@ public final class DataGenerators {
 
     public static Tour genTour() {
         Tour tour = new Tour();
-        tour.setName(TOURS_NAME[randomizer.nextInt(TOURS_NAME.length)]);
+        tour.setTour_name(TOURS_NAME[randomizer.nextInt(TOURS_NAME.length)]);
         return tour;
     }
 
     public static void generateData() {
-        ExhibitDao exhibitDao = new ExhibitDao(Exhibit.class);
+        ExhibitDao exhibitDao = new ExhibitDao();
         HallDao hallDao = new HallDao(Hall.class);
         TourDao tourDao = new TourDao(Tour.class);
         WorkerDao workerDao = new WorkerDao(Worker.class);

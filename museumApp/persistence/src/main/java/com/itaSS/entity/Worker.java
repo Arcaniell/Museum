@@ -19,11 +19,9 @@ public class Worker {
     @Column
     BigDecimal salary;
     @Column
-    Positions position;
+    Positions position;;
     @OneToOne
-    Hall hall;
-    @OneToOne
-    Tour tour;
+    Job job;
 
     public Integer getId() {
         return id;
@@ -65,19 +63,11 @@ public class Worker {
         this.position = position;
     }
 
-    public Hall getHall() {
-        return hall;
+    public Job getJob() {
+        return job;
     }
 
-    public void setHall(Hall hall) {
-        this.hall = hall;
-    }
-
-    public Tour getTour() {
-        return tour;
-    }
-
-    public void setTour(Tour tour) {
-        this.tour = tour;
+    public void setJob(Job job) {
+        this.job = job;
     }
 }

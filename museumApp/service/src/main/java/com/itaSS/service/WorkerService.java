@@ -1,25 +1,33 @@
 package com.itaSS.service;
 
 import com.itaSS.dao.WorkerDao;
+import com.itaSS.entity.Hall;
+import com.itaSS.entity.Tour;
 import com.itaSS.entity.Worker;
 import com.itaSS.entity.enumInfo.Positions;
+import com.itaSS.service.utils.CriterionBuilder;
+import org.hibernate.criterion.Criterion;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Set;
 
 import static com.itaSS.utils.ConsoleInputReader.readLine;
 import static com.itaSS.utils.ConsoleInputReader.selectEnum;
 
-public class WorkerService {
+public class WorkerService extends BaseService{
+
     public void addWorker() {
         System.out.println("Please enter required info: ");
         Worker worker = new Worker();
+
         System.out.println("\tWorker name");
         String name = readLine();
         worker.setName(name);
+
         System.out.println("Enter additional info, or leave it blank: ");
         System.out.println("\tWorker salary: ");
         String input = readLine();
-        //TODO Salary format check
         if (!input.equals("")) {
             worker.setSalary(new BigDecimal(input));
         }
@@ -30,5 +38,50 @@ public class WorkerService {
         }
         WorkerDao workerDao = new WorkerDao(Worker.class);
         workerDao.create(worker);
+    }
+
+    public Worker searchWorker() {
+        System.out.println(searchOptions);
+        System.out.println("\tfirst_name last_name position salary");
+        WorkerDao workerDao = new WorkerDao(Worker.class);
+        String input = readLine();
+        Set<Criterion> criteria = CriterionBuilder.getWorkerCriterion(input);
+        List<Worker> workers = workerDao.getSpecEntity(criteria);
+        int result_size = workers.size();
+        while (result_size == zero_result || result_size > many_results ) {
+            if (result_size == zero_result) {
+                System.out.println("No mathces found, try again!");
+                System.out.println(searchOptions);
+            } else {
+                System.out.println(workers);
+                System.out.println("More then single result, enter search criteria again: ");
+                System.out.println(searchOptions);
+            }
+            input = readLine();
+            criteria = CriterionBuilder.getWorkerCriterion(input);
+            workers = workerDao.getSpecEntity(criteria);
+            result_size = workers.size();
+        }
+        return workers.get(firstElement);
+    }
+
+    public void setWorkerToHall() {
+        Worker worker = searchWorker();
+
+        HallService hallService = new HallService();
+        Hall hall = hallService.searchHall();
+
+        WorkerDao workerDao = new WorkerDao(Worker.class);
+        workerDao.setWorkerToHall(worker, hall);
+    }
+
+    public void setWorkerToTour() {
+        Worker worker = searchWorker();
+
+        TourService tourService = new TourService();
+        Tour tour = tourService.searchTour();
+
+        WorkerDao workerDao = new WorkerDao(Worker.class);
+        workerDao.setWorkerToTour(worker, tour);
     }
 }

@@ -18,17 +18,17 @@ public class TourService extends BaseService {
         Tour tour = new Tour();
         System.out.println("\tTour name");
         String name = readLine();
-        tour.setName(name);
+        tour.setTour_name(name);
         System.out.println("Enter additional info, or leave it blank: ");
         System.out.println("\tBegin Date (YYYY-MM-DD)");
         Date infoDate = readDate();
         if (infoDate  != null) {
-            tour.setBeginDate(infoDate);
+            tour.setBegin_Date(infoDate);
         }
         System.out.println("\tEnding Date (YYYY-MM-DD)");
         infoDate = readDate();
         if (infoDate   != null) {
-            tour.setEndDate(infoDate);
+            tour.setEnd_Date(infoDate);
         }
         TourDao tourDao = new TourDao(Tour.class);
         tourDao.create(tour);

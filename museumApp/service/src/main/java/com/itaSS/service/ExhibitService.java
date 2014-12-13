@@ -53,20 +53,17 @@ public class ExhibitService extends BaseService {
             exhibit.setTechnic(technics);
         }
 
-        ExhibitDao exhibitDao = new ExhibitDao(Exhibit.class);
+        ExhibitDao exhibitDao = new ExhibitDao();
         exhibitDao.create(exhibit);
     }
 
     public Exhibit searchExhibit() {
-        final int many_results = 1;
-        final int zero_result = 0;
-        final String searchOptions = "Enter criteria for Exhibit search in following format (\"-\" for skip): ";
         System.out.println(searchOptions);
-        System.out.println("\texhibit_name author_name creation_date arrive_date ");
-        ExhibitDao exhibitDao = new ExhibitDao(Exhibit.class);
+        System.out.println("\texhibit_name author_name creation_date arrive_date material technic");
+        ExhibitDao exhibitDao = new ExhibitDao();
         String input = readLine();
-        Set<Criterion> criterias = CriterionBuilder.getExhibitCriterion(input);
-        List<Exhibit> exhibits = exhibitDao.getSpecEntity(criterias);
+        Set<Criterion> criteria = CriterionBuilder.getExhibitCriterion(input);
+        List<Exhibit> exhibits = exhibitDao.getSpecEntity(criteria);
         int result_size = exhibits.size();
         while (result_size == zero_result || result_size > many_results ) {
             if (result_size == zero_result) {
@@ -78,14 +75,15 @@ public class ExhibitService extends BaseService {
                 System.out.println(searchOptions);
             }
             input = readLine();
-            exhibits = exhibitDao.getSpecExhibit(input);
+            criteria = CriterionBuilder.getExhibitCriterion(input);
+            exhibits = exhibitDao.getSpecEntity(criteria);
             result_size = exhibits.size();
         }
         return exhibits.get(firstElement);
     }
 
     public void setExhibitToHall(Exhibit exhibit, Hall hall) {
-        ExhibitDao exhibitDao = new ExhibitDao(Exhibit.class);
+        ExhibitDao exhibitDao = new ExhibitDao();
         exhibitDao.setExhibitToHall(exhibit, hall);
     }
 }

@@ -17,6 +17,8 @@ public class Hall {
     private Set<Tour> tour = new HashSet<>();
     @OneToMany(mappedBy = "hall", cascade = CascadeType.PERSIST)
     private Set<Exhibit> exhibits;
+    @OneToOne
+    Job job;
 
     public Hall() { }
 
@@ -52,6 +54,14 @@ public class Hall {
         this.tour = tour;
     }
 
+    public Job getJob() {
+        return job;
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
+    }
+
     public String toString() {
         StringBuilder sb =new StringBuilder();
         sb.append("Name: ").append(name).append(" \n");
@@ -64,7 +74,7 @@ public class Hall {
         if (tour.size() != 0) {
             sb.append("Tours: \n");
             for (Tour tours : tour) {
-                sb.append("\t").append(tours.getName()).append(" \n");
+                sb.append("\t").append(tours.getTour_name()).append(" \n");
             }
         }
         return sb.toString();

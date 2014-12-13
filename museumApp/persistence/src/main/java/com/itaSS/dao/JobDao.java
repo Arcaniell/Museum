@@ -1,7 +1,10 @@
 package com.itaSS.dao;
 
-/**
- * Created by yura on 12.12.14.
- */
-public class JobDao {
+import com.itaSS.entity.Job;
+
+public class JobDao extends BaseDao<Job, Integer>{
+    public JobDao() {
+        super(Job.class);
+    }
+
 }

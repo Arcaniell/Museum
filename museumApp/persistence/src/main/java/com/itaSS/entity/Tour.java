@@ -13,16 +13,18 @@ public class Tour {
     @GeneratedValue
     private Integer id;
     @Column(nullable = false)
-    private String name;
+    private String tour_name;
     @Column
-    private Date beginDate;
+    private Date begin_Date;
     @Column
-    private Date endDate;
+    private Date end_Date;
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name="tour_hall",
         joinColumns={@JoinColumn(name="tour_id")},
         inverseJoinColumns={@JoinColumn(name="hall_id")})
     Set<Hall> hall= new HashSet<>();
+    @OneToOne
+    Job job;
 
     public Integer getId() {
         return id;
@@ -32,28 +34,28 @@ public class Tour {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTour_name() {
+        return tour_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTour_name(String tour_name) {
+        this.tour_name = tour_name;
     }
 
-    public Date getBeginDate() {
-        return beginDate;
+    public Date getBegin_Date() {
+        return begin_Date;
     }
 
-    public void setBeginDate(Date beginDate) {
-        this.beginDate = beginDate;
+    public void setBegin_Date(Date begin_Date) {
+        this.begin_Date = begin_Date;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public Date getEnd_Date() {
+        return end_Date;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setEnd_Date(Date end_Date) {
+        this.end_Date = end_Date;
     }
 
     public Set<Hall> getHall() {
@@ -64,14 +66,22 @@ public class Tour {
         this.hall = hall;
     }
 
+    public Job getJob() {
+        return job;
+    }
+
+    public void setJob(Job job) {
+        this.job = job;
+    }
+
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(name).append(" ");
-        if (beginDate != null) {
-            stringBuilder.append("begin date: ").append(beginDate.toString()).append(" ");
+        stringBuilder.append(tour_name).append(" ");
+        if (begin_Date != null) {
+            stringBuilder.append("begin date: ").append(begin_Date.toString()).append(" ");
         }
-        if (endDate != null) {
-            stringBuilder.append("end date: ").append(endDate.toString());
+        if (end_Date != null) {
+            stringBuilder.append("end date: ").append(end_Date.toString());
         }
         return stringBuilder.toString();
     }

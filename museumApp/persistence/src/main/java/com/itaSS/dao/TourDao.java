@@ -41,16 +41,16 @@ public class TourDao extends BaseDao<Tour, Integer> {
         String[]args = input.split(" ");
         int argCounter = 0;
         if (!args[argCounter].equals("-")) {
-            criteria.add(Restrictions.like("name", args[argCounter] + "%"));
+            criteria.add(Restrictions.like("tour_name", args[argCounter] + "%"));
         }
         //TODO REWORK!
         argCounter++;
         if (!args[argCounter].equals("-")) {
-            criteria.add(Restrictions.like("beginDate", args[argCounter] + "%"));
+            criteria.add(Restrictions.like("begin_date", args[argCounter] + "%"));
         }
         argCounter++;
         if (!args[argCounter].equals("-")) {
-            criteria.add(Restrictions.like("endDate", args[argCounter] + "%"));
+            criteria.add(Restrictions.like("end_date", args[argCounter] + "%"));
         }
         List<Tour> results;
         results = criteria.list();

@@ -12,8 +12,6 @@ public abstract class BaseDao<T, E extends Serializable> {
 
     private Class<T> entityClass;
 
-    protected BaseDao() {}
-
     protected BaseDao(Class<T> entityClass) {
         this.entityClass = entityClass;
     }

@@ -62,20 +62,20 @@ public class Exhibit {
         this.name = name;
     }
 
-    public Date getArrive_date() {
-        return arrive_date;
-    }
-
-    public void setArrive_date(Date arrive_date) {
-        this.arrive_date = arrive_date;
-    }
-
     public Date getCreation_date() {
         return creation_date;
     }
 
     public void setCreation_date(Date creation_date) {
         this.creation_date = creation_date;
+    }
+
+    public Date getArrive_date() {
+        return arrive_date;
+    }
+
+    public void setArrive_date(Date arrive_date) {
+        this.arrive_date = arrive_date;
     }
 
     public String getAuthor_name() {
@@ -111,7 +111,20 @@ public class Exhibit {
     }
 
     public String toString() {
-        return "Exhibit name: " + name + " Author name: " + author_name + "\n";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Exhibit name: ").append(name).append(" Author name: ").append(author_name);
+        sb.append(" Creation date: ").append(creation_date);
+        if (arrive_date != null) {
+            sb.append(" Arrival date: ").append(arrive_date);
+        }
+        if (material != null) {
+            sb.append(" Material: ").append(material);
+        }
+        if (technic != null) {
+            sb.append(" Technic: ").append(technic);
+        }
+        sb.append("\n");
+        return sb.toString();
     }
 
 }

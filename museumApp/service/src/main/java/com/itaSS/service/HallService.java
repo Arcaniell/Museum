@@ -3,6 +3,8 @@ package com.itaSS.service;
 import com.itaSS.dao.HallDao;
 import com.itaSS.entity.Hall;
 import com.itaSS.entity.Tour;
+import com.itaSS.service.utils.CriterionBuilder;
+import org.hibernate.criterion.Criterion;
 
 import java.util.HashSet;
 import java.util.List;
@@ -27,7 +29,8 @@ public class HallService extends BaseService{
         System.out.println("\thall_name");
         HallDao hallDao = new HallDao(Hall.class);
         String input = readLine();
-        List<Hall> halls = hallDao.getSpecHall(input);
+        Set<Criterion> criteria = CriterionBuilder.getHallCriterion(input);
+        List<Hall> halls = hallDao.getSpecEntity(criteria);
         while (halls.size() > 1 || halls.size() == 0) {
             if (halls.size() == 0) {
                 System.out.println("No results found!");
@@ -36,7 +39,8 @@ public class HallService extends BaseService{
             System.out.println("More the one result, enter search criteria again: ");
             System.out.println(halls);
             input = readLine();
-            halls = hallDao.getSpecHall(input);
+            criteria = CriterionBuilder.getExhibitCriterion(input);
+            halls = hallDao.getSpecEntity(criteria);
         }
         return halls.get(firstElement);
     }

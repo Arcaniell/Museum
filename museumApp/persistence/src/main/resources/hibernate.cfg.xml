@@ -31,5 +31,6 @@
         <mapping class="com.itaSS.entity.Hall" />
         <mapping class="com.itaSS.entity.Worker" />
         <mapping class="com.itaSS.entity.Tour" />
+        <mapping class="com.itaSS.entity.Job" />
     </session-factory>
 </hibernate-configuration>

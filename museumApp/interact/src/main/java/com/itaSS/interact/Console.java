@@ -29,6 +29,10 @@ public class Console {
             setExhibitToHall();
         } else if (selected == Actions.SET_HALLS_TO_TOUR) {
             setHallsToTour();
+        } else if (selected == Actions.SET_WORKER_TO_HALL) {
+            setWorkerToHall();
+        } else if (selected == Actions.SET_WORKER_TO_TOUR) {
+            setWorkerToTour();
         }
     }
 
@@ -69,11 +73,13 @@ public class Console {
 
     //TODO Ask Nazar for base class for some Entities
     private void setWorkerToHall() {
-
+        WorkerService workerService = new WorkerService();
+        workerService.setWorkerToHall();
     }
 
     private void setWorkerToTour() {
-
+        WorkerService workerService = new WorkerService();
+        workerService.setWorkerToTour();
     }
 
     public void close() {
