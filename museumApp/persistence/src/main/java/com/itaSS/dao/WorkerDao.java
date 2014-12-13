@@ -2,7 +2,6 @@ package com.itaSS.dao;
 
 import com.itaSS.entity.Job;
 import com.itaSS.entity.Worker;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 

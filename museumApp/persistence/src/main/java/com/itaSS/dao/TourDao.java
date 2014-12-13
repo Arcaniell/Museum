@@ -2,12 +2,9 @@ package com.itaSS.dao;
 
 import com.itaSS.entity.Hall;
 import com.itaSS.entity.Tour;
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
-import java.util.List;
 import java.util.Set;
 
 

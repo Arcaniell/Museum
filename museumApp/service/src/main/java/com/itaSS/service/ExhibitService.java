@@ -24,7 +24,9 @@ public class ExhibitService extends BaseService {
     }
 
     public void updateExhibit() {
+        System.out.println("ENTER INFO FOR EXHIBIT TO UPDATE: ");
         Exhibit exhibitOld = searchExhibit();
+        System.out.println("ENTER NEW INFO: ");
         exhibitDao.update(enterExhibitInfo(exhibitOld));
     }
 
@@ -69,11 +71,15 @@ public class ExhibitService extends BaseService {
         //TODO Check formats for names
         System.out.println("\tAuthor Name: ");
         String authorName = readLine();
-        exhibit.setAuthorName(authorName);
+        if (!authorName.equals("")) {
+            exhibit.setAuthorName(authorName);
+        }
 
         System.out.println("\tExhibit Name: ");
         String exhibitName = readLine();
-        exhibit.setName(exhibitName);
+        if (!exhibitName.equals("")) {
+            exhibit.setName(exhibitName);
+        }
 
         System.out.println("\tCreation Date (YYYY-MM-DD)");
         Date creationDate = readDate();

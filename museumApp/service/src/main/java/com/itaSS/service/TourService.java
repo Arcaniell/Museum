@@ -3,7 +3,6 @@ package com.itaSS.service;
 import com.itaSS.dao.TourDao;
 import com.itaSS.entity.Hall;
 import com.itaSS.entity.Tour;
-import com.itaSS.entity.Worker;
 import com.itaSS.service.utils.CriterionBuilder;
 import org.hibernate.criterion.Criterion;
 

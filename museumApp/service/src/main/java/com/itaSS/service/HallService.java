@@ -22,14 +22,15 @@ public class HallService extends BaseService{
     }
 
     public void updateHall() {
+        System.out.println("ENTER INFO FOR HALL TO UPDATE: ");
         Hall hallOld = searchHall();
+        System.out.println("ENTER NEW INFO: ");
         hallDao.update(enterHallInfo(hallOld));
     }
 
     public Hall searchHall() {
-        System.out.println("Enter criteria for Hall search in following format (\"-\" for skip): ");
+        System.out.println(searchOptions);
         System.out.println("\thall_name");
-        hallDao = new HallDao(Hall.class);
         String input = readLine();
         Set<Criterion> criteria = CriterionBuilder.getHallCriterion(input);
         List<Hall> halls = hallDao.getSpecEntity(criteria);
@@ -75,15 +76,15 @@ public class HallService extends BaseService{
         return enterHallInfo(null);
     }
 
-    public Hall enterHallInfo(Hall hall) {
+    public Hall enterHallInfo(Hall id_hall) {
         System.out.println("Please enter required info: ");
-        if (hall == null) {
-            hall = new Hall();
+        if (id_hall == null) {
+            id_hall = new Hall();
         }
         System.out.println("\tHall name");
         String hallName = readLine();
-        hall.setName(hallName);
-        return hall;
+        id_hall.setName(hallName);
+        return id_hall;
     }
 
 }
