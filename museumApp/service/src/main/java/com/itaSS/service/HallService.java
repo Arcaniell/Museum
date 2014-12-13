@@ -14,20 +14,22 @@ import static com.itaSS.utils.ConsoleInputReader.readLine;
 
 public class HallService extends BaseService{
 
+    HallDao hallDao = new HallDao(Hall.class);
+
     public void addHall() {
-        System.out.println("Please enter required info: ");
-        Hall hall = new Hall();
-        System.out.println("\tHall name");
-        String hallName = readLine();
-        hall.setName(hallName);
-        HallDao hallDao = new HallDao(Hall.class);
+        Hall hall = enterHallInfo();
         hallDao.create(hall);
+    }
+
+    public void updateHall() {
+        Hall hallOld = searchHall();
+        hallDao.update(enterHallInfo(hallOld));
     }
 
     public Hall searchHall() {
         System.out.println("Enter criteria for Hall search in following format (\"-\" for skip): ");
         System.out.println("\thall_name");
-        HallDao hallDao = new HallDao(Hall.class);
+        hallDao = new HallDao(Hall.class);
         String input = readLine();
         Set<Criterion> criteria = CriterionBuilder.getHallCriterion(input);
         List<Hall> halls = hallDao.getSpecEntity(criteria);
@@ -67,6 +69,21 @@ public class HallService extends BaseService{
         System.out.println(tour);
 
         tourService.setHallsToTour(halls, tour);
+    }
+
+    public Hall enterHallInfo() {
+        return enterHallInfo(null);
+    }
+
+    public Hall enterHallInfo(Hall hall) {
+        System.out.println("Please enter required info: ");
+        if (hall == null) {
+            hall = new Hall();
+        }
+        System.out.println("\tHall name");
+        String hallName = readLine();
+        hall.setName(hallName);
+        return hall;
     }
 
 }

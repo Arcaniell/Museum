@@ -25,8 +25,7 @@ public class ExhibitService extends BaseService {
 
     public void updateExhibit() {
         Exhibit exhibitOld = searchExhibit();
-        exhibitDao.update(enterExhibit(exhibitOld));
-
+        exhibitDao.update(enterExhibitInfo(exhibitOld));
     }
 
     public Exhibit searchExhibit() {
@@ -59,10 +58,10 @@ public class ExhibitService extends BaseService {
     }
 
     private Exhibit enterExhibit() {
-        return enterExhibit(null);
+        return enterExhibitInfo(null);
     }
 
-    private Exhibit enterExhibit(Exhibit exhibit) {
+    private Exhibit enterExhibitInfo(Exhibit exhibit) {
         System.out.println("Please enter required info: ");
         if (exhibit == null) {
             exhibit = new Exhibit();
