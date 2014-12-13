@@ -66,6 +66,7 @@ public class Tour extends Job{
         if (end_Date != null) {
             stringBuilder.append("end date: ").append(end_Date.toString());
         }
+        stringBuilder.append("\n");
         return stringBuilder.toString();
     }
 

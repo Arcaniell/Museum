@@ -35,26 +35,4 @@ public class TourDao extends BaseDao<Tour, Integer> {
         }
     }
 
-    public List<Tour> getSpecTour(String input) {
-        Session session = SessionFact.getSessionFactory().openSession();
-        Criteria criteria = session.createCriteria(Tour.class);
-        String[]args = input.split(" ");
-        int argCounter = 0;
-        if (!args[argCounter].equals("-")) {
-            criteria.add(Restrictions.like("tour_name", args[argCounter] + "%"));
-        }
-        //TODO REWORK!
-        argCounter++;
-        if (!args[argCounter].equals("-")) {
-            criteria.add(Restrictions.like("begin_date", args[argCounter] + "%"));
-        }
-        argCounter++;
-        if (!args[argCounter].equals("-")) {
-            criteria.add(Restrictions.like("end_date", args[argCounter] + "%"));
-        }
-        List<Tour> results;
-        results = criteria.list();
-        return results;
-    }
-
 }
