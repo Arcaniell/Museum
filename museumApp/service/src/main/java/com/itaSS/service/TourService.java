@@ -16,7 +16,7 @@ import static com.itaSS.utils.ConsoleInputReader.readLine;
 
 public class TourService extends BaseService {
 
-    private TourDao tourDao = new TourDao(Tour.class);
+    private static TourDao tourDao = new TourDao(Tour.class);
 
     public void addTour() {
         Tour tour = enterTourInfo();

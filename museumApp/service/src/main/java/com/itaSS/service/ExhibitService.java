@@ -16,7 +16,7 @@ import static com.itaSS.utils.ConsoleInputReader.*;
 
 public class ExhibitService extends BaseService {
 
-    private ExhibitDao exhibitDao = new ExhibitDao();
+    private static ExhibitDao exhibitDao = new ExhibitDao();
 
     public void addExhibit() {
         Exhibit exhibit = enterExhibit();
