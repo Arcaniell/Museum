@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -63,13 +64,13 @@ public abstract class BaseDao<T, E extends Serializable> {
         session.close();
     }
 
-    public List<T> getSpecEntity(Set<Criterion> criterions) {
+    public Set<T> getSpecEntity(Set<Criterion> criterions) {
         session = SessionFact.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(entityClass);
         for (Criterion criterion : criterions) {
             criteria.add(criterion);
         }
-        List<T> result = criteria.list();
+        Set<T> result = new HashSet<>(criteria.list());
         session.close();
         return result;
     }

@@ -19,7 +19,7 @@ public class Tour extends Job{
     @Column
     private Date end_Date;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinTable(name="tour_hall",
         joinColumns={@JoinColumn(name="tour_id")},
         inverseJoinColumns={@JoinColumn(name="hall_id")})

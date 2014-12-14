@@ -33,19 +33,8 @@ public class TourDao extends BaseDao<Tour, Integer> {
     }
 
     public Set<Hall> getHallsFromTour(Tour idTour) {
-        Session session = null;
-        try {
-            Tour tour = read(idTour.getId());
-            session = SessionFact.getSessionFactory().openSession();
-            session.getTransaction().begin();
-//
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-            session.getTransaction().rollback();
-        } finally {
-            session.close();
-        }
-        return null;
+        Tour tour = read(idTour.getId());
+        return tour.getHall();
     }
 
 }

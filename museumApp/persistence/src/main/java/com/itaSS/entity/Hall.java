@@ -12,10 +12,10 @@ public class Hall extends Job{
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "hall")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "hall")
     private Set<Tour> tour = new HashSet<>();
 
-    @OneToMany(mappedBy = "hall", cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hall", cascade = CascadeType.PERSIST)
     private Set<Exhibit> exhibits;
 
     public Hall() { }
@@ -42,6 +42,26 @@ public class Hall extends Job{
 
     public void setTour(Set<Tour> tour) {
         this.tour = tour;
+    }
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Hall)) return false;
+
+        Hall hall = (Hall) o;
+
+        if (exhibits != null ? !exhibits.equals(hall.exhibits) : hall.exhibits != null) return false;
+        if (!name.equals(hall.name)) return false;
+        if (tour != null ? !tour.equals(hall.tour) : hall.tour != null) return false;
+
+        return true;
+    }
+
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + (tour != null ? tour.hashCode() : 0);
+        result = 31 * result + (exhibits != null ? exhibits.hashCode() : 0);
+        return result;
     }
 
     public String toString() {
