@@ -7,7 +7,6 @@ import com.itaSS.service.utils.CriterionBuilder;
 import org.hibernate.criterion.Criterion;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static com.itaSS.utils.ConsoleInputReader.readLine;
@@ -29,11 +28,17 @@ public class HallService extends BaseService{
     }
 
     public Hall searchHall() {
+        return searchHall(null);
+    }
+
+    public Hall searchHall(String input) {
         System.out.println(searchOptions);
         System.out.println("\thall_name");
-        String input = readLine();
+        if (input == null) {
+            input = readLine();
+        }
         Set<Criterion> criteria = CriterionBuilder.getHallCriterion(input);
-        List<Hall> halls = hallDao.getSpecEntity(criteria);
+        Set<Hall> halls = hallDao.getSpecEntity(criteria);
         while (halls.size() > 1 || halls.size() == 0) {
             if (halls.size() == 0) {
                 System.out.println("No results found!");
@@ -41,27 +46,26 @@ public class HallService extends BaseService{
             }
             System.out.println("More the one result, enter search criteria again: ");
             System.out.println(halls);
-            input = readLine();
+            if (input == null) {
+                input = readLine();
+            }
             criteria = CriterionBuilder.getExhibitCriterion(input);
             halls = hallDao.getSpecEntity(criteria);
         }
-        return halls.get(firstElement);
+        return (halls.size() == zero_result) ? null : halls.iterator().next();
     }
 
     public void setHallsToTour() {
         Set<Hall> halls = new HashSet<>();
-        String input = "";
-        boolean firstRun = true;
         while (true) {
-            if (!firstRun) {
-                System.out.println("Select another Hall or enter exit");
-                input = readLine();
-                if (input.equals("exit")) {
-                    break;
-                }
+            System.out.println("Select Hall or enter exit");
+            System.out.println(searchOptions);
+            String input = readLine();
+            if (input.equals("exit")) {
+                break;
+            } else {
+                halls.add(searchHall(input));
             }
-            halls.add(searchHall());
-            firstRun = false;
         }
         System.out.println(halls);
 

@@ -66,7 +66,7 @@ public class WorkerService extends BaseService{
         System.out.println("\tfirst_name last_name salary position");
         String input = readLine();
         Set<Criterion> criteria = CriterionBuilder.getWorkerCriterion(input);
-        List<Worker> workers = workerDao.getSpecEntity(criteria);
+        Set<Worker> workers = workerDao.getSpecEntity(criteria);
         int result_size = workers.size();
         while (result_size == zero_result || result_size > many_results ) {
             if (result_size == zero_result) {
@@ -82,7 +82,7 @@ public class WorkerService extends BaseService{
             workers = workerDao.getSpecEntity(criteria);
             result_size = workers.size();
         }
-        return workers.get(firstElement);
+        return (workers.size() == 0) ? null : workers.iterator().next();
     }
 
     public void setWorkerToHall() {

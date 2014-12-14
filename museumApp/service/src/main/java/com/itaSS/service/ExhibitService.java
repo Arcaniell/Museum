@@ -35,7 +35,7 @@ public class ExhibitService extends BaseService {
         System.out.println("\texhibit_name author_name creation_date arrive_date material technic");
         String input = readLine();
         Set<Criterion> criteria = CriterionBuilder.getExhibitCriterion(input);
-        List<Exhibit> exhibits = exhibitDao.getSpecEntity(criteria);
+        Set<Exhibit> exhibits = exhibitDao.getSpecEntity(criteria);
         int result_size = exhibits.size();
         while (result_size == zero_result || result_size > many_results ) {
             if (result_size == zero_result) {
@@ -51,7 +51,7 @@ public class ExhibitService extends BaseService {
             exhibits = exhibitDao.getSpecEntity(criteria);
             result_size = exhibits.size();
         }
-        return exhibits.get(firstElement);
+        return (exhibits.size() == 0) ? null : exhibits.iterator().next();
     }
 
     public void setExhibitToHall(Exhibit exhibit, Hall hall) {
