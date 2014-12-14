@@ -25,7 +25,7 @@ public class Exhibit {
     private Materials material;
     @Column
     private Technics technic;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Hall hall;
 
 //    You have to override the equals() and hashCode() methods if you:

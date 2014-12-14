@@ -6,4 +6,5 @@ public class HallDao extends BaseDao<Hall, Integer> {
     public HallDao(Class<Hall> type) {
         super(type);
     }
+
 }

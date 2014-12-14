@@ -32,9 +32,4 @@ public class TourDao extends BaseDao<Tour, Integer> {
         }
     }
 
-    public Set<Hall> getHallsFromTour(Tour idTour) {
-        Tour tour = read(idTour.getId());
-        return tour.getHall();
-    }
-
 }
