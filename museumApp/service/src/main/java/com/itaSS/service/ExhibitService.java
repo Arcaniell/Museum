@@ -3,6 +3,7 @@ package com.itaSS.service;
 import com.itaSS.dao.ExhibitDao;
 import com.itaSS.entity.Exhibit;
 import com.itaSS.entity.Hall;
+import com.itaSS.entity.Tour;
 import com.itaSS.entity.enumInfo.Materials;
 import com.itaSS.entity.enumInfo.Technics;
 import com.itaSS.service.utils.CriterionBuilder;
@@ -63,6 +64,13 @@ public class ExhibitService extends BaseService {
         ExhibitDao exhibitDao = new ExhibitDao();
         exhibitDao.setExhibitToHall(exhibit, hall);
     }
+
+    public void showToursForExhibit(){
+        System.out.println("What tour are you looking for?");
+      for (Tour tour : searchExhibit().getHall().getTour()) {
+                System.out.println(tour);
+            }
+        }
 
     private Exhibit enterExhibit() {
         return enterExhibitInfo(null);

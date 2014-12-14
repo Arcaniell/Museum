@@ -59,6 +59,8 @@ public class Console {
                 tourService.showHallsFromTour();
             } else if (selected == Actions.SHOW_EXHIBITS_IN_TOUR) {
                 tourService.showExhibitsFromTour();
+            } else if (selected == Actions.SHOW_TOURS_FOR_EXHIBIT) {
+                exhibitService.showToursForExhibit();
             }
             selected = (Actions) selectEnum(Actions.class);
         }

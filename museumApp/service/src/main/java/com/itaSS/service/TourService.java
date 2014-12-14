@@ -89,9 +89,9 @@ public class TourService extends BaseService {
     }
 
     public void showHallsFromTour() {
-        System.out.println("What tour are you looking for?");
+        System.out.println("What Tour are you looking for?");
         Tour tour = searchTour();
-        Set<Hall> halls = tourDao.getHallsFromTour(tour);
+        Set<Hall> halls = tourDao.read(tour.getId()).getHall();
         if (halls.size() == 0) {
             System.out.println("Tour is empty!");
         } else {
@@ -102,9 +102,9 @@ public class TourService extends BaseService {
     }
 
     public void showExhibitsFromTour() {
-        System.out.println("What tour are you looking for?");
+        System.out.println("What Tour are you looking for?");
         Tour tour = searchTour();
-        Set<Hall> halls = tourDao.getHallsFromTour(tour);
+        Set<Hall> halls = tourDao.read(tour.getId()).getHall();
         if (halls.size() == 0) {
             System.out.println("Tour is empty!");
         } else {
