@@ -16,53 +16,64 @@ public abstract class BaseDao<T, E extends Serializable> {
         this.entityClass = entityClass;
     }
 
+    Session session;
+
     @SuppressWarnings("unchecked")
     public List<T> getAll() {
-        Session session = SessionFact.getSessionFactory().openSession();
+        session = SessionFact.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(entityClass)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        session.close();
         return criteria.list();
     }
 
     public E create(T entity) {
-        Session session = SessionFact.getSessionFactory().openSession();
+        session = SessionFact.getSessionFactory().openSession();
         session.getTransaction().begin();
         @SuppressWarnings("unchecked")
         E id = (E) session.save(entity);
         session.getTransaction().commit();
+        session.close();
         return id;
     }
 
     public T read(E id) {
-        Session session = SessionFact.getSessionFactory().openSession();
+        session = SessionFact.getSessionFactory().openSession();
         session.getTransaction().begin();
         @SuppressWarnings("unchecked")
         T fetchedEntity = (T) session.get(entityClass, id);
         session.getTransaction().commit();
+        session.close();
         return fetchedEntity;
     }
 
     public void update(T entity) {
-        Session session = SessionFact.getSessionFactory().openSession();
+        session = SessionFact.getSessionFactory().openSession();
         session.getTransaction().begin();
         session.update(entity);
         session.getTransaction().commit();
+        session.close();
     }
 
     public void delete(T entity) {
-        Session session = SessionFact.getSessionFactory().openSession();
+        session = SessionFact.getSessionFactory().openSession();
         session.getTransaction().begin();
         session.delete(entity);
         session.getTransaction().commit();
+        session.close();
     }
 
     public List<T> getSpecEntity(Set<Criterion> criterions) {
-        Session session = SessionFact.getSessionFactory().openSession();
+        session = SessionFact.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(entityClass);
         for (Criterion criterion : criterions) {
             criteria.add(criterion);
         }
         return criteria.list();
+    }
+
+    public void closeSession() {
+        session.close();
     }
 
 }

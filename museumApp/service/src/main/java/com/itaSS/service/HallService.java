@@ -34,6 +34,7 @@ public class HallService extends BaseService{
         String input = readLine();
         Set<Criterion> criteria = CriterionBuilder.getHallCriterion(input);
         List<Hall> halls = hallDao.getSpecEntity(criteria);
+        hallDao.closeSession();
         while (halls.size() > 1 || halls.size() == 0) {
             if (halls.size() == 0) {
                 System.out.println("No results found!");
@@ -44,6 +45,7 @@ public class HallService extends BaseService{
             input = readLine();
             criteria = CriterionBuilder.getExhibitCriterion(input);
             halls = hallDao.getSpecEntity(criteria);
+            hallDao.closeSession();
         }
         return halls.get(firstElement);
     }

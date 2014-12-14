@@ -67,7 +67,7 @@ public class WorkerService extends BaseService{
         String input = readLine();
         Set<Criterion> criteria = CriterionBuilder.getWorkerCriterion(input);
         List<Worker> workers = workerDao.getSpecEntity(criteria);
-
+        workerDao.closeSession();
         int result_size = workers.size();
         while (result_size == zero_result || result_size > many_results ) {
             if (result_size == zero_result) {
@@ -81,6 +81,7 @@ public class WorkerService extends BaseService{
             input = readLine();
             criteria = CriterionBuilder.getWorkerCriterion(input);
             workers = workerDao.getSpecEntity(criteria);
+            workerDao.closeSession();
             result_size = workers.size();
         }
         return workers.get(firstElement);

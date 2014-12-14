@@ -105,6 +105,11 @@ public final class CriterionBuilder {
         return Restrictions.like(column, input + "%");
     }
 
+    private static boolean formatDateChecker(String input) {
+        final String datePattern = ("/d{4}-/d{4}-/d{4}");
+        return input.matches(datePattern);
+    }
+
     private static Criterion getDateCriterion(String column, String input)  {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
@@ -117,13 +122,12 @@ public final class CriterionBuilder {
         return criterion;
     }
 
+    private static Criterion getNumberCriterion(String column, String input) {
+        return Restrictions.eq(column, new BigDecimal(input));
+    }
     private static Criterion getEnumCriterion(String column, Class<? extends Enum<?>> type) {
         Enum<?> obj = ConsoleInputReader.selectEnum(type);
         return Restrictions.eq(column, obj);
-    }
-
-    private static Criterion getNumberCriterion(String column, String input) {
-        return Restrictions.eq(column, new BigDecimal(input));
     }
 
 }

@@ -13,11 +13,11 @@ public class TourDao extends BaseDao<Tour, Integer> {
         super(type);
     }
 
-    public void setHallsToTour(Set<Hall> halls, Tour id_tour){
+    public void setHallsToTour(Set<Hall> halls, Tour idTour){
         Session session = null;
         try {
             session = SessionFact.getSessionFactory().openSession();
-            Tour tour = (Tour) session.get(Tour.class, id_tour.getId());
+            Tour tour = (Tour) session.get(Tour.class, idTour.getId());
             session.getTransaction().begin();
             for (Hall hall : halls) {
                 Hall buffHall = (Hall) session.get(Hall.class, hall.getId());
@@ -30,6 +30,24 @@ public class TourDao extends BaseDao<Tour, Integer> {
         } finally {
             session.close();
         }
+    }
+
+    public Set<Hall> getHallsFromTour(Tour idTour) {
+        Session session = null;
+//        final String queryStroke = "SELECT hall";
+        try {
+            Tour tour = read(idTour.getId());
+            session = SessionFact.getSessionFactory().openSession();
+            session.getTransaction().begin();
+//
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            session.getTransaction().rollback();
+//            Query query = session.createQuery(queryStroke);
+        } finally {
+            session.close();
+        }
+        return null;
     }
 
 }
