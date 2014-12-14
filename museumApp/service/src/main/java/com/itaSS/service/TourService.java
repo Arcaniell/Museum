@@ -61,7 +61,6 @@ public class TourService extends BaseService {
         String input = readLine();
         Set<Criterion> criteria = CriterionBuilder.getTourCriterion(input);
         List<Tour> tours = tourDao.getSpecEntity(criteria);
-        tourDao.closeSession();
         int result_size = tours.size();
         while (result_size == zero_result || result_size > many_results ) {
             if (result_size == zero_result) {
@@ -75,7 +74,6 @@ public class TourService extends BaseService {
             input = readLine();
             criteria = CriterionBuilder.getTourCriterion(input);
             tours = tourDao.getSpecEntity(criteria);
-            tourDao.closeSession();
             result_size = tours.size();
         }
         return tours.get(firstElement);
@@ -85,8 +83,11 @@ public class TourService extends BaseService {
         tourDao.setHallsToTour(halls, tour);
     }
 
-    public Set<Hall> getHallsFromTour(Tour tour) {
+    public Set<Hall> getHallsFromTour() {
         Set<Hall> halls = new HashSet<>();
+        System.out.println("What hall are you looking for?");
+        Tour tour = searchTour();
+        tourDao.getHallsFromTour(tour);
         return halls;
     }
 

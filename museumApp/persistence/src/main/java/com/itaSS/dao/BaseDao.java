@@ -69,11 +69,9 @@ public abstract class BaseDao<T, E extends Serializable> {
         for (Criterion criterion : criterions) {
             criteria.add(criterion);
         }
-        return criteria.list();
-    }
-
-    public void closeSession() {
+        List<T> result = criteria.list();
         session.close();
+        return result;
     }
 
 }

@@ -34,7 +34,6 @@ public class TourDao extends BaseDao<Tour, Integer> {
 
     public Set<Hall> getHallsFromTour(Tour idTour) {
         Session session = null;
-//        final String queryStroke = "SELECT hall";
         try {
             Tour tour = read(idTour.getId());
             session = SessionFact.getSessionFactory().openSession();
@@ -43,7 +42,6 @@ public class TourDao extends BaseDao<Tour, Integer> {
             session.getTransaction().commit();
         } catch (HibernateException e) {
             session.getTransaction().rollback();
-//            Query query = session.createQuery(queryStroke);
         } finally {
             session.close();
         }
