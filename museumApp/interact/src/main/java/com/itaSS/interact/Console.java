@@ -46,6 +46,8 @@ public class Console {
             workerService.setWorkerToHall();
         } else if (selected == Actions.SET_WORKER_TO_TOUR) {
             workerService.setWorkerToTour();
+        } else if (selected == Actions.SHOW_HALLS_IN_TOUR) {
+            tourService.showHallsFromTour();
         }
     }
 
