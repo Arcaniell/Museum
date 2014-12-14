@@ -30,6 +30,12 @@ public class ExhibitService extends BaseService {
         exhibitDao.update(enterExhibitInfo(exhibitOld));
     }
 
+    public void deleteExhibit() {
+        System.out.println("ENTER INFO FOR EXHIBIT TO DELETE");
+        Exhibit exhibit = searchExhibit();
+        exhibitDao.delete(exhibit);
+    }
+
     public Exhibit searchExhibit() {
         System.out.println(searchOptions);
         System.out.println("\texhibit_name author_name creation_date arrive_date material technic");

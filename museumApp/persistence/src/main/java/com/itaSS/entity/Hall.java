@@ -12,10 +12,10 @@ public class Hall extends Job{
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "hall")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "hall", cascade = CascadeType.ALL)
     private Set<Tour> tour = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hall", cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hall", cascade = CascadeType.ALL)
     private Set<Exhibit> exhibits;
 
     public Hall() { }

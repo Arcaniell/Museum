@@ -27,6 +27,12 @@ public class HallService extends BaseService{
         hallDao.update(enterHallInfo(hallOld));
     }
 
+    public void deleteHall() {
+        System.out.println("ENTER INFO FOR HALL TO DELETE");
+        Hall hall = searchHall();
+        hallDao.delete(hall);
+    }
+
     public Hall searchHall() {
         return searchHall(null);
     }

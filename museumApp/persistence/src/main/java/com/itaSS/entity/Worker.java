@@ -26,7 +26,7 @@ public class Worker {
     @Column
     Positions position;;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     Job job;
 
     public Integer getId() {

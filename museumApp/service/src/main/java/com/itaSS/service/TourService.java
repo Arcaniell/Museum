@@ -28,6 +28,12 @@ public class TourService extends BaseService {
         tourDao.update(enterTourInfo(oldTour));
     }
 
+    public void deleteTour() {
+        System.out.println("ENTER INFO FOR TOUR TO DELETE");
+        Tour tour = searchTour();
+        tourDao.delete(tour);
+    }
+
     private Tour enterTourInfo() {
         return enterTourInfo(null);
     }

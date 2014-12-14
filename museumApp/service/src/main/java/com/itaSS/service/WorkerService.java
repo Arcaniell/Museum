@@ -29,6 +29,12 @@ public class WorkerService extends BaseService{
         workerDao.update(enterWorkerInfo(workerOld));
     }
 
+    public void deleteWorker() {
+        System.out.println("ENTER INFO FOR WORKER TO DELETE");
+        Worker worker = searchWorker();
+        workerDao.delete(worker);
+    }
+
     private Worker enterWorkerInfo() {
         return enterWorkerInfo(null);
     }
