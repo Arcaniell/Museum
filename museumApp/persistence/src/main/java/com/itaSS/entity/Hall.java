@@ -12,10 +12,10 @@ public class Hall extends Job{
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "hall", cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "hall", cascade = CascadeType.ALL)
     private Set<Tour> tour = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hall", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "hall", cascade = CascadeType.ALL)
     private Set<Exhibit> exhibits;
 
     public Hall() { }
@@ -60,7 +60,7 @@ public class Hall extends Job{
     public int hashCode() {
         int result = name.hashCode();
         result = 31 * result + (tour != null ? tour.hashCode() : 0);
-        result = 31 * result + (exhibits != null ? exhibits.hashCode() : 0);
+//        result = 31 * result + (exhibits != null ? exhibits.hashCode() : 0);
         return result;
     }
 

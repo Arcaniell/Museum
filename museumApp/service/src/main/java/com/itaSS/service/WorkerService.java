@@ -9,7 +9,6 @@ import com.itaSS.service.utils.CriterionBuilder;
 import org.hibernate.criterion.Criterion;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Set;
 
 import static com.itaSS.utils.ConsoleInputReader.readLine;

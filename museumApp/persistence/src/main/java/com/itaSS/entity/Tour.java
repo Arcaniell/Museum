@@ -19,7 +19,7 @@ public class Tour extends Job{
     @Column
     private Date end_Date;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="tour_hall",
         joinColumns={@JoinColumn(name="tour_id")},
         inverseJoinColumns={@JoinColumn(name="hall_id")})

@@ -28,7 +28,7 @@ public class SessionFact {
 
     public static void closeFactory() throws HibernateException {
 
-        if (!sessionFactory.isClosed() && sessionFactory != null) {
+        if (sessionFactory != null && !sessionFactory.isClosed()) {
             sessionFactory.close();
         }
     }

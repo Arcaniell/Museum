@@ -1,14 +1,13 @@
 package com.itaSS.service;
 
 import com.itaSS.dao.TourDao;
+import com.itaSS.entity.Exhibit;
 import com.itaSS.entity.Hall;
 import com.itaSS.entity.Tour;
 import com.itaSS.service.utils.CriterionBuilder;
 import org.hibernate.criterion.Criterion;
 
 import java.sql.Date;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static com.itaSS.utils.ConsoleInputReader.readDate;
@@ -101,4 +100,20 @@ public class TourService extends BaseService {
             }
         }
     }
+
+    public void showExhibitsFromTour() {
+        System.out.println("What tour are you looking for?");
+        Tour tour = searchTour();
+        Set<Hall> halls = tourDao.getHallsFromTour(tour);
+        if (halls.size() == 0) {
+            System.out.println("Tour is empty!");
+        } else {
+            for (Hall hall : halls) {
+                for(Exhibit exhibit : hall.getExhibits()) {
+                    System.out.println(exhibit);
+                }
+            }
+        }
+    }
+
 }

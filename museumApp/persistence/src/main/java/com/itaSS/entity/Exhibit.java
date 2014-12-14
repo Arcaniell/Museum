@@ -32,14 +32,6 @@ public class Exhibit {
 //    intend to put instances of persistent classes in a Set
 //    (the recommended way to represent many-valued associations);
 
-    public boolean equals(Exhibit exhibit) {
-        return this.name.equals(exhibit.getName())
-                && this.arriveDate.equals(exhibit.getArriveDate())
-                && this.authorName.equals(exhibit.getAuthorName())
-                && this.material.equals(exhibit.getMaterial())
-                && this.technic.equals(exhibit.getTechnic());
-    }
-
     public Exhibit() {}
 
     public Integer getId() {
@@ -104,6 +96,36 @@ public class Exhibit {
 
     public void setHall(Hall hall) {
         this.hall = hall;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Exhibit)) return false;
+
+        Exhibit exhibit = (Exhibit) o;
+
+        if (arriveDate != null ? !arriveDate.equals(exhibit.arriveDate) : exhibit.arriveDate != null) return false;
+        if (!authorName.equals(exhibit.authorName)) return false;
+        if (!creationDate.equals(exhibit.creationDate)) return false;
+        if (hall != null ? !hall.equals(exhibit.hall) : exhibit.hall != null) return false;
+        if (material != exhibit.material) return false;
+        if (!name.equals(exhibit.name)) return false;
+        if (technic != exhibit.technic) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + authorName.hashCode();
+        result = 31 * result + creationDate.hashCode();
+        result = 31 * result + (arriveDate != null ? arriveDate.hashCode() : 0);
+        result = 31 * result + (material != null ? material.hashCode() : 0);
+        result = 31 * result + (technic != null ? technic.hashCode() : 0);
+//        result = 31 * result + (hall != null ? hall.hashCode() : 0);
+        return result;
     }
 
     public String toString() {
