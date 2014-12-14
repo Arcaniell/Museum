@@ -1,7 +1,5 @@
 package com.itaSS.interact;
 
-import com.itaSS.dao.JobDao;
-import com.itaSS.utils.DataGenerators;
 
 public class RunConsole {
     private Console console = new Console();
@@ -15,11 +13,8 @@ public class RunConsole {
     }
 
     public static void main(String[] args) {
-        DataGenerators.generateData();
+//        DataGenerators.generateData();
         RunConsole runConsole = new RunConsole();
-        //=======
-//        jobDao.setWorkerToHall();
-        //=======
         runConsole.run();
         runConsole.stop();
     }
