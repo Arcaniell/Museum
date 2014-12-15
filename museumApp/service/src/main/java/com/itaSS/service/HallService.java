@@ -13,7 +13,7 @@ import static com.itaSS.utils.ConsoleInputReader.readLine;
 
 public class HallService extends BaseService{
 
-    private static HallDao hallDao = new HallDao(Hall.class);
+    private static HallDao hallDao = new HallDao();
 
     public void addHall() {
         Hall hall = enterHallInfo();

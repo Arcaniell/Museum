@@ -6,8 +6,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 public class WorkerDao extends BaseDao<Worker, Integer> {
-    public WorkerDao(Class<Worker> type) {
-        super(type);
+    public WorkerDao() {
+        super(Worker.class);
     }
 
     public void setWorkerToJob(Worker id_worker, Job id_job) {

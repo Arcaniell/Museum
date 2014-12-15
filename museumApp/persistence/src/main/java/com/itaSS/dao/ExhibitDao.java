@@ -2,7 +2,6 @@ package com.itaSS.dao;
 
 import com.itaSS.entity.Exhibit;
 import com.itaSS.entity.Hall;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 public class ExhibitDao extends BaseDao<Exhibit, Integer> {

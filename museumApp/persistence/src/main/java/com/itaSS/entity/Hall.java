@@ -16,7 +16,7 @@ public class Hall extends Job{
     private Set<Tour> tour = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "hall", cascade = CascadeType.ALL)
-    private Set<Exhibit> exhibits;
+    private Set<Exhibit> exhibits = new HashSet<>();
 
     public Hall() { }
 
@@ -44,6 +44,7 @@ public class Hall extends Job{
         this.tour = tour;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Hall)) return false;
@@ -57,10 +58,11 @@ public class Hall extends Job{
         return true;
     }
 
+    @Override
     public int hashCode() {
         int result = name.hashCode();
         result = 31 * result + (tour != null ? tour.hashCode() : 0);
-//        result = 31 * result + (exhibits != null ? exhibits.hashCode() : 0);
+        result = 31 * result + (exhibits != null ? exhibits.hashCode() : 0);
         return result;
     }
 

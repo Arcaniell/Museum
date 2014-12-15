@@ -16,7 +16,7 @@ import static com.itaSS.utils.ConsoleInputReader.selectEnum;
 
 public class WorkerService extends BaseService{
 
-    private static WorkerDao workerDao = new WorkerDao(Worker.class);
+    private static WorkerDao workerDao = new WorkerDao();
 
     public void addWorker() {
         Worker worker = enterWorkerInfo();
@@ -105,7 +105,6 @@ public class WorkerService extends BaseService{
         TourService tourService = new TourService();
         Tour tour = tourService.searchTour();
 
-        WorkerDao workerDao = new WorkerDao(Worker.class);
         workerDao.setWorkerToJob(worker, tour);
     }
 }

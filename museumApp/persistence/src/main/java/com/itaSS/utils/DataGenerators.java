@@ -11,6 +11,7 @@ import com.itaSS.entity.Worker;
 import com.itaSS.entity.enumInfo.Materials;
 import com.itaSS.entity.enumInfo.Positions;
 import com.itaSS.entity.enumInfo.Technics;
+import sun.util.resources.cldr.ta.CalendarData_ta_IN;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -51,7 +52,13 @@ public final class DataGenerators {
         MAPPED_EX_NAMES.remove(exName);
         exhibit.setName(exName);
         Calendar calendar = Calendar.getInstance();
-        calendar.set(randomizer.nextInt(25) + 1980, randomizer.nextInt(12) + 1, randomizer.nextInt(28) + 1);
+        calendar.set(Calendar.YEAR, randomizer.nextInt(25) + 1980);
+        calendar.set(Calendar.MONTH, randomizer.nextInt(12) + 1);
+        calendar.set(Calendar.DAY_OF_MONTH, randomizer.nextInt(28) + 1);
+        calendar.set(Calendar.HOUR, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
         exhibit.setArriveDate(new Date(calendar.getTime().getTime()));
         calendar.set(randomizer.nextInt(500) + 1500, randomizer.nextInt(12) + 1, randomizer.nextInt(28) + 1);
         exhibit.setCreationDate(new Date(calendar.getTime().getTime()));
@@ -90,7 +97,7 @@ public final class DataGenerators {
         worker.setFirstName(WORKERS_FIRST_NAME[randomizer.nextInt(WORKERS_FIRST_NAME.length)]);
         worker.setLastName(WORKERS_LAST_NAME[randomizer.nextInt(WORKERS_LAST_NAME.length)]);
         worker.setPosition(getRandVal(Positions.values()));
-        worker.setSalary(new BigDecimal("10.5"));
+        worker.setSalary(new BigDecimal("10.50"));
         return worker;
     }
 
@@ -110,9 +117,9 @@ public final class DataGenerators {
 
     public static void generateData() {
         ExhibitDao exhibitDao = new ExhibitDao();
-        HallDao hallDao = new HallDao(Hall.class);
-        TourDao tourDao = new TourDao(Tour.class);
-        WorkerDao workerDao = new WorkerDao(Worker.class);
+        HallDao hallDao = new HallDao();
+        TourDao tourDao = new TourDao();
+        WorkerDao workerDao = new WorkerDao();
         for (Exhibit exhibit : DataGenerators.genExhibitList()) {
             exhibitDao.create(exhibit);
         }

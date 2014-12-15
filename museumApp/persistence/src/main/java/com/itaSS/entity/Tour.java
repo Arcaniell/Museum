@@ -57,6 +57,30 @@ public class Tour extends Job{
         this.hall = hall;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Tour)) return false;
+
+        Tour tour = (Tour) o;
+
+        if (begin_Date != null ? !begin_Date.equals(tour.begin_Date) : tour.begin_Date != null) return false;
+        if (end_Date != null ? !end_Date.equals(tour.end_Date) : tour.end_Date != null) return false;
+        if (hall != null ? !hall.equals(tour.hall) : tour.hall != null) return false;
+        if (!tour_name.equals(tour.tour_name)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = tour_name.hashCode();
+        result = 31 * result + (begin_Date != null ? begin_Date.hashCode() : 0);
+        result = 31 * result + (end_Date != null ? end_Date.hashCode() : 0);
+        result = 31 * result + (hall != null ? hall.hashCode() : 0);
+        return result;
+    }
+
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(tour_name).append(" ");

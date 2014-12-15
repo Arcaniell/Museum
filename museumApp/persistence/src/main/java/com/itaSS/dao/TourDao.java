@@ -9,8 +9,8 @@ import java.util.Set;
 
 
 public class TourDao extends BaseDao<Tour, Integer> {
-    public TourDao(Class<Tour> type) {
-        super(type);
+    public TourDao() {
+        super(Tour.class);
     }
 
     public void setHallsToTour(Set<Hall> halls, Tour idTour){

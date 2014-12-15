@@ -98,7 +98,6 @@ public class Exhibit {
         this.hall = hall;
     }
 
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Exhibit)) return false;
@@ -116,7 +115,6 @@ public class Exhibit {
         return true;
     }
 
-    @Override
     public int hashCode() {
         int result = name.hashCode();
         result = 31 * result + authorName.hashCode();
@@ -124,7 +122,7 @@ public class Exhibit {
         result = 31 * result + (arriveDate != null ? arriveDate.hashCode() : 0);
         result = 31 * result + (material != null ? material.hashCode() : 0);
         result = 31 * result + (technic != null ? technic.hashCode() : 0);
-//        result = 31 * result + (hall != null ? hall.hashCode() : 0);
+        result = 31 * result + (hall != null ? hall.hashCode() : 0);
         return result;
     }
 

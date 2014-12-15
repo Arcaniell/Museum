@@ -15,19 +15,19 @@ public class Worker {
     private Integer id;
 
     @Column(name = "first_name", nullable = false)
-    String firstName;
+    private String firstName;
 
     @Column(name = "last_name", nullable = false)
-    String lastName;
+    private String lastName;
 
     @Column
-    BigDecimal salary;
+    private BigDecimal salary;
 
     @Column
-    Positions position;;
+    private Positions position;;
 
     @OneToOne(cascade = CascadeType.ALL)
-    Job job;
+    private Job job;
 
     public Integer getId() {
         return id;
@@ -75,5 +75,33 @@ public class Worker {
 
     public void setJob(Job job) {
         this.job = job;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Worker)) return false;
+
+        Worker worker = (Worker) o;
+
+        if (!firstName.equals(worker.firstName)) return false;
+        if (id != null ? !id.equals(worker.id) : worker.id != null) return false;
+        if (job != null ? !job.equals(worker.job) : worker.job != null) return false;
+        if (!lastName.equals(worker.lastName)) return false;
+        if (position != worker.position) return false;
+        if (salary != null ? !salary.equals(worker.salary) : worker.salary != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + (salary != null ? salary.hashCode() : 0);
+        result = 31 * result + (position != null ? position.hashCode() : 0);
+        result = 31 * result + (job != null ? job.hashCode() : 0);
+        return result;
     }
 }
