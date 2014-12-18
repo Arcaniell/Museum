@@ -85,11 +85,18 @@ public class HallService extends BaseService{
         tourService.setHallsToTour(halls, tour);
     }
 
-    public Hall enterHallInfo() {
+    public void showToursForHall() {
+        Hall hall = searchHall();
+        for (Tour tour : hall.getTour()) {
+            System.out.println(tour);
+        }
+    }
+
+    private Hall enterHallInfo() {
         return enterHallInfo(null);
     }
 
-    public Hall enterHallInfo(Hall hall) {
+    private Hall enterHallInfo(Hall hall) {
         System.out.println("Please enter required info: ");
         if (hall == null) {
             hall = new Hall();
