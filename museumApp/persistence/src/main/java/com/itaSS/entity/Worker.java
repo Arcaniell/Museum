@@ -107,13 +107,13 @@ public class Worker {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("First name: ").append(firstName);
-        sb.append("Last name: ").append(lastName);
+        sb.append("First name: ").append(firstName).append(" ");
+        sb.append("Last name: ").append(lastName).append(" ");
         if (salary != null) {
-            sb.append("Salary:").append(salary);
+            sb.append("Salary:").append(salary).append(" ");
         }
         if (position != null) {
-            sb.append("Position: ").append(position);
+            sb.append("Position: ").append(position).append(" ");
         }
         sb.append("\n");
         return sb.toString();

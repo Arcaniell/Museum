@@ -89,15 +89,18 @@ public class HallService extends BaseService{
         return enterHallInfo(null);
     }
 
-    public Hall enterHallInfo(Hall id_hall) {
+    public Hall enterHallInfo(Hall hall) {
         System.out.println("Please enter required info: ");
-        if (id_hall == null) {
-            id_hall = new Hall();
+        if (hall == null) {
+            hall = new Hall();
         }
         System.out.println("\tHall name");
         String hallName = readLine();
-        id_hall.setName(hallName);
-        return id_hall;
+        while (!checkName(hallName)) {
+            hallName = readLine();
+        }
+        hall.setName(hallName);
+        return hall;
     }
 
 }

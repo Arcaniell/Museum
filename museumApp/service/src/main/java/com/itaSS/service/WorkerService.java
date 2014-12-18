@@ -26,9 +26,7 @@ public class WorkerService extends BaseService{
     public void updateWorker() {
         System.out.println("ENTER INFO FOR WORKER TO UPDATE: ");
         Worker workerOld = searchWorker();
-        while (workerOld == null) {
-            workerOld = searchWorker();
-        }
+        System.out.println("ENTER NEW INFO: ");
         workerDao.update(enterWorkerInfo(workerOld));
     }
 
@@ -47,19 +45,33 @@ public class WorkerService extends BaseService{
         if (worker == null) {
             worker = new Worker();
         }
+
         System.out.println("\tWorker first name: ");
         String name = readLine();
-        worker.setFirstName(name);
+        if (!name.equals("")) {
+            while (!checkName(name)) {
+                name = readLine();
+            }
+            worker.setFirstName(name);
+        }
 
         System.out.println("\tWorker last name: ");
-        name = readLine();
-        worker.setLastName(name);
+        String lastName = readLine();
+        if (!lastName.equals("")) {
+            while (!checkName(lastName)) {
+                lastName = readLine();
+            }
+            worker.setLastName(name);
+        }
 
         System.out.println("Enter additional info, or leave it blank: ");
         System.out.println("\tWorker salary: ");
-        String input = readLine();
-        if (!input.equals("")) {
-            worker.setSalary(new BigDecimal(input));
+        String salary = readLine();
+        if (!salary.equals("")) {
+            while (!checkNumber(salary)) {
+                salary = readLine();
+            }
+            worker.setSalary(new BigDecimal(salary));
         }
 
         System.out.println("\tPosition: ");

@@ -49,18 +49,32 @@ public class TourService extends BaseService {
         }
         System.out.println("\tTour name");
         String name = readLine();
-        tour.setTourName(name);
+        if (!name.equals("")) {
+            while (!checkName(name)) {
+                name = readLine();
+            }
+            tour.setTourName(name);
+        }
 
         System.out.println("Enter additional info, or leave it blank: ");
         System.out.println("\tBegin Date (YYYY-MM-DD)");
-        Date infoDate = readDate();
-        if (infoDate  != null) {
-            tour.setBeginDate(infoDate);
+        String readBeginDate = readLine();
+        if (!readBeginDate.equals("")) {
+            while (!checkDate(readBeginDate)) {
+                readBeginDate = readLine();
+            }
+            Date beginDate = readDate(readBeginDate);
+            tour.setBeginDate(beginDate);
         }
+
         System.out.println("\tEnding Date (YYYY-MM-DD)");
-        infoDate = readDate();
-        if (infoDate   != null) {
-            tour.setEndDate(infoDate);
+        String readEndDate = readLine();
+        if (!readEndDate.equals("")) {
+            while (!checkDate(readEndDate)) {
+                readEndDate = readLine();
+            }
+            Date endDate = readDate(readEndDate);
+            tour.setEndDate(endDate);
         }
         return tour;
     }

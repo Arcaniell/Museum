@@ -5,15 +5,14 @@ import com.itaSS.entity.Exhibit;
 import com.itaSS.entity.Hall;
 import com.itaSS.entity.Tour;
 import com.itaSS.entity.Worker;
-import static com.itaSS.utils.DataGenerators.*;
 import org.hibernate.SessionFactory;
-
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static com.itaSS.utils.DataGenerators.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class baseDaoTest {
 

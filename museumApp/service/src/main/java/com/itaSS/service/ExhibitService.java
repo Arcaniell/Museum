@@ -80,29 +80,43 @@ public class ExhibitService extends BaseService {
         if (exhibit == null) {
             exhibit = new Exhibit();
         }
-        //TODO Check formats for names
+
         System.out.println("\tAuthor Name: ");
         String authorName = readLine();
         if (!authorName.equals("")) {
+            while (!checkName(authorName)) {
+                authorName = readLine();
+            }
             exhibit.setAuthorName(authorName);
         }
 
         System.out.println("\tExhibit Name: ");
         String exhibitName = readLine();
         if (!exhibitName.equals("")) {
+            while (!checkComplexName(exhibitName)) {
+                exhibitName = readLine();
+            }
             exhibit.setName(exhibitName);
         }
 
         System.out.println("\tCreation Date (YYYY-MM-DD)");
-        Date creationDate = readDate();
-        if (creationDate != null) {
+        String readCreationDate = readLine();
+        if (!readCreationDate.equals("")) {
+            while (!checkDate(readCreationDate)) {
+                readCreationDate = readLine();
+            }
+            Date creationDate = readDate(readCreationDate);
             exhibit.setCreationDate(creationDate);
         }
 
         System.out.println("Enter additional info, or leave it blank: ");
         System.out.println("\tArrival Date (YYYY-MM-DD)");
-        Date arrivalDate = readDate();
-        if (arrivalDate != null) {
+        String readArrivalDate = readLine();
+        if (!readArrivalDate.equals("")) {
+            while (!checkDate(readArrivalDate)) {
+                readArrivalDate = readLine();
+            }
+            Date arrivalDate = readDate(readArrivalDate);
             exhibit.setArriveDate(arrivalDate);
         }
 
