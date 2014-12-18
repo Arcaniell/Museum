@@ -23,6 +23,9 @@ public class HallService extends BaseService{
     public void updateHall() {
         System.out.println("ENTER INFO FOR HALL TO UPDATE: ");
         Hall hallOld = searchHall();
+        while (hallOld == null) {
+            hallOld = searchHall();
+        }
         System.out.println("ENTER NEW INFO: ");
         hallDao.update(enterHallInfo(hallOld));
     }
@@ -39,14 +42,12 @@ public class HallService extends BaseService{
 
     public Hall searchHall(String input) {
         System.out.println(searchOptions);
-        System.out.println("\thall_name");
-        if (input == null) {
-            input = readLine();
-        }
-        Set<Criterion> criteria = CriterionBuilder.getHallCriterion(input);
+        Hall searchExample = enterHallInfo();
+        Set<Criterion> criteria = CriterionBuilder.getHallCriterion(searchExample);
         Set<Hall> halls = hallDao.getSpecEntity(criteria);
-        while (halls.size() > 1 || halls.size() == 0) {
-            if (halls.size() == 0) {
+        int result_size = halls.size();
+        while (result_size > 1 || result_size == 0) {
+            if (result_size == 0) {
                 System.out.println("No results found!");
                 break;
             }
@@ -55,8 +56,10 @@ public class HallService extends BaseService{
             if (input == null) {
                 input = readLine();
             }
-            criteria = CriterionBuilder.getExhibitCriterion(input);
+            searchExample = enterHallInfo();
+            criteria = CriterionBuilder.getHallCriterion(searchExample);
             halls = hallDao.getSpecEntity(criteria);
+            result_size = halls.size();
         }
         return (halls.size() == zero_result) ? null : halls.iterator().next();
     }

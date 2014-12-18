@@ -70,7 +70,7 @@ public abstract class BaseDao<T, E extends Serializable> {
         for (Criterion criterion : criterions) {
             criteria.add(criterion);
         }
-        Set<T> result = new HashSet<>(criteria.list());
+        Set<T> result = new HashSet<T>(criteria.list());
         session.close();
         return result;
     }

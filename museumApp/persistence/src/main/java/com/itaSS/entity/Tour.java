@@ -10,14 +10,14 @@ import java.util.Set;
 @PrimaryKeyJoinColumn(name = "id")
 public class Tour extends Job{
 
-    @Column(nullable = false)
-    private String tour_name;
+    @Column(name = "", nullable = false)
+    private String tourName;
 
-    @Column
-    private Date begin_Date;
+    @Column(name = "begin_date", nullable = false)
+    private Date beginDate;
 
-    @Column
-    private Date end_Date;
+    @Column(name = "end_date")
+    private Date endDate;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="tour_hall",
@@ -25,28 +25,28 @@ public class Tour extends Job{
         inverseJoinColumns={@JoinColumn(name="hall_id")})
     Set<Hall> hall= new HashSet<>();
 
-    public String getTour_name() {
-        return tour_name;
+    public String getTourName() {
+        return tourName;
     }
 
-    public void setTour_name(String tour_name) {
-        this.tour_name = tour_name;
+    public void setTourName(String tour_name) {
+        this.tourName = tour_name;
     }
 
-    public Date getBegin_Date() {
-        return begin_Date;
+    public Date getBeginDate() {
+        return beginDate;
     }
 
-    public void setBegin_Date(Date begin_Date) {
-        this.begin_Date = begin_Date;
+    public void setBeginDate(Date begin_Date) {
+        this.beginDate = begin_Date;
     }
 
-    public Date getEnd_Date() {
-        return end_Date;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setEnd_Date(Date end_Date) {
-        this.end_Date = end_Date;
+    public void setEndDate(Date end_Date) {
+        this.endDate = end_Date;
     }
 
     public Set<Hall> getHall() {
@@ -64,31 +64,31 @@ public class Tour extends Job{
 
         Tour tour = (Tour) o;
 
-        if (begin_Date != null ? !begin_Date.equals(tour.begin_Date) : tour.begin_Date != null) return false;
-        if (end_Date != null ? !end_Date.equals(tour.end_Date) : tour.end_Date != null) return false;
+        if (beginDate != null ? !beginDate.equals(tour.beginDate) : tour.beginDate != null) return false;
+        if (endDate != null ? !endDate.equals(tour.endDate) : tour.endDate != null) return false;
         if (hall != null ? !hall.equals(tour.hall) : tour.hall != null) return false;
-        if (!tour_name.equals(tour.tour_name)) return false;
+        if (!tourName.equals(tour.tourName)) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = tour_name.hashCode();
-        result = 31 * result + (begin_Date != null ? begin_Date.hashCode() : 0);
-        result = 31 * result + (end_Date != null ? end_Date.hashCode() : 0);
+        int result = tourName.hashCode();
+        result = 31 * result + (beginDate != null ? beginDate.hashCode() : 0);
+        result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
         result = 31 * result + (hall != null ? hall.hashCode() : 0);
         return result;
     }
 
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(tour_name).append(" ");
-        if (begin_Date != null) {
-            stringBuilder.append("begin date: ").append(begin_Date.toString()).append(" ");
+        stringBuilder.append(tourName).append(" ");
+        if (beginDate != null) {
+            stringBuilder.append("begin date: ").append(beginDate.toString()).append(" ");
         }
-        if (end_Date != null) {
-            stringBuilder.append("end date: ").append(end_Date.toString());
+        if (endDate != null) {
+            stringBuilder.append("end date: ").append(endDate.toString());
         }
         stringBuilder.append("\n");
         return stringBuilder.toString();

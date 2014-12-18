@@ -78,7 +78,7 @@ public class Hall extends Job{
         if (tour.size() != 0) {
             sb.append("Tours: \n");
             for (Tour tours : tour) {
-                sb.append("\t").append(tours.getTour_name()).append(" \n");
+                sb.append("\t").append(tours.getTourName()).append(" \n");
             }
         }
         return sb.toString();

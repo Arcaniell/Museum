@@ -19,7 +19,7 @@ public class ExhibitService extends BaseService {
     private static ExhibitDao exhibitDao = new ExhibitDao();
 
     public void addExhibit() {
-        Exhibit exhibit = enterExhibit();
+        Exhibit exhibit = enterExhibitInfo();
         exhibitDao.create(exhibit);
     }
 
@@ -38,9 +38,8 @@ public class ExhibitService extends BaseService {
 
     public Exhibit searchExhibit() {
         System.out.println(searchOptions);
-        System.out.println("\texhibit_name author_name creation_date arrive_date material technic");
-        String input = readLine();
-        Set<Criterion> criteria = CriterionBuilder.getExhibitCriterion(input);
+        Exhibit searchExample = enterExhibitInfo();
+        Set<Criterion> criteria = CriterionBuilder.getExhibitCriterion(searchExample);
         Set<Exhibit> exhibits = exhibitDao.getSpecEntity(criteria);
         int result_size = exhibits.size();
         while (result_size == zero_result || result_size > many_results ) {
@@ -52,8 +51,8 @@ public class ExhibitService extends BaseService {
                 System.out.println("More then single result, enter search criteria again: ");
                 System.out.println(searchOptions);
             }
-            input = readLine();
-            criteria = CriterionBuilder.getExhibitCriterion(input);
+            searchExample = enterExhibitInfo();
+            criteria = CriterionBuilder.getExhibitCriterion(searchExample);
             exhibits = exhibitDao.getSpecEntity(criteria);
             result_size = exhibits.size();
         }
@@ -72,7 +71,7 @@ public class ExhibitService extends BaseService {
             }
         }
 
-    private Exhibit enterExhibit() {
+    private Exhibit enterExhibitInfo() {
         return enterExhibitInfo(null);
     }
 

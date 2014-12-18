@@ -104,4 +104,18 @@ public class Worker {
         result = 31 * result + (job != null ? job.hashCode() : 0);
         return result;
     }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("First name: ").append(firstName);
+        sb.append("Last name: ").append(lastName);
+        if (salary != null) {
+            sb.append("Salary:").append(salary);
+        }
+        if (position != null) {
+            sb.append("Position: ").append(position);
+        }
+        sb.append("\n");
+        return sb.toString();
+    }
 }

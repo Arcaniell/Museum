@@ -1,5 +1,9 @@
 package com.itaSS.service.utils;
 
+import com.itaSS.entity.Exhibit;
+import com.itaSS.entity.Hall;
+import com.itaSS.entity.Tour;
+import com.itaSS.entity.Worker;
 import com.itaSS.entity.enumInfo.Materials;
 import com.itaSS.entity.enumInfo.Positions;
 import com.itaSS.entity.enumInfo.Technics;
@@ -17,85 +21,63 @@ import java.util.Set;
 
 public final class CriterionBuilder {
 
-    private static int argCounter;
-
-    public static Set<Criterion> getHallCriterion(String input) {
+    public static Set<Criterion> getHallCriterion(Hall hall) {
         Set<Criterion> result = new HashSet<>();
-        String[] args = input.split(" ");
-        argCounter = 0;
-        if (!args[argCounter].equals("-")) {
-            result.add(getStrokeCriterion("name", args[argCounter]));
+        if (hall.getName() != null) {
+            result.add(getStrokeCriterion("name", hall.getName()));
         }
         return result;
     }
 
-    public static Set<Criterion> getExhibitCriterion(String input) {
+    public static Set<Criterion> getExhibitCriterion(Exhibit exhibit) {
         Set<Criterion> result = new HashSet<>();
-        String[] args = input.split(" ");
-        argCounter = 0;
-        if (!args[argCounter].equals("-")) {
-            result.add(getStrokeCriterion("name", args[argCounter]));
+        if (exhibit.getName() != null) {
+            result.add(getStrokeCriterion("name", exhibit.getName()));
         }
-        argCounter++;
-        if (!args[argCounter].equals("-")) {
-            result.add(getStrokeCriterion("author_name", args[argCounter]));
+        if (exhibit.getAuthorName() != null) {
+            result.add(getStrokeCriterion("authorName", exhibit.getAuthorName()));
         }
-        argCounter++;
-        if (!args[argCounter].equals("-")) {
-            result.add(getDateCriterion("creation_date", args[argCounter]));
+        if (exhibit.getCreationDate() != null ) {
+            result.add(getDateCriterion("creationDate", exhibit.getCreationDate()));
         }
-        argCounter++;
-        if (!args[argCounter].equals("-")) {
-            result.add(getDateCriterion("arrive_date", args[argCounter]));
+        if (exhibit.getArriveDate() != null) {
+            result.add(getDateCriterion("arriveDate", exhibit.getArriveDate()));
         }
-        argCounter++;
-        if (!args[argCounter].equals("-")) {
-            System.out.println("Select material:");
+        if (exhibit.getMaterial() != null) {
             result.add(getEnumCriterion("material", Materials.class));
         }
-        argCounter++;
-        if (!args[argCounter].equals("-")) {
-            System.out.println("Select technic:");
+        if (exhibit.getTechnic() != null) {
             result.add(getEnumCriterion("technic", Technics.class));
         }
         return result;
     }
 
-    public static Set<Criterion> getTourCriterion(String input) {
+    public static Set<Criterion> getTourCriterion(Tour tour) {
         Set<Criterion> result = new HashSet<>();
-        String[] args = input.split(" ");
-        argCounter = 0;
-        if (!args[argCounter].equals("-")) {
-            result.add(getStrokeCriterion("tour_name", args[argCounter]));
+        if (tour.getTourName() != null) {
+            result.add(getStrokeCriterion("tourName", tour.getTourName()));
         }
-        argCounter++;
-        if (!args[argCounter].equals("-")) {
-            result.add(getDateCriterion("begin_Date", args[argCounter]));
+        if (tour.getBeginDate() != null) {
+            result.add(getDateCriterion("beginDate", tour.getBeginDate()));
         }
-        argCounter++;
-        if (!args[argCounter].equals("-")) {
-            result.add(getDateCriterion("end_Date", args[argCounter]));
+        if (tour.getEndDate() != null) {
+            result.add(getDateCriterion("endDate", tour.getEndDate()));
         }
         return result;
     }
 
-    public static Set<Criterion> getWorkerCriterion(String input) {
+    public static Set<Criterion> getWorkerCriterion(Worker worker) {
         Set<Criterion> result = new HashSet<>();
-        String[] args = input.split(" ");
-        argCounter = 0;
-        if (!args[argCounter].equals("-")) {
-            result.add(getStrokeCriterion("firstName", args[argCounter]));
+        if (worker.getFirstName() != null) {
+            result.add(getStrokeCriterion("firstName", worker.getFirstName()));
         }
-        argCounter++;
-        if (!args[argCounter].equals("-")) {
-            result.add(getStrokeCriterion("lastName", args[argCounter]));
+        if (worker.getLastName() != null) {
+            result.add(getStrokeCriterion("lastName", worker.getLastName()));
         }
-        argCounter++;
-        if(!args[argCounter].equals("-")) {
-            result.add(getNumberCriterion("salary", args[argCounter]));
+        if (worker.getSalary() != null) {
+            result.add(getNumberCriterion("salary", worker.getSalary()));
         }
-        argCounter++;
-        if (!args[argCounter].equals("-")) {
+        if (worker.getPosition() != null) {
             result.add(getEnumCriterion("position", Positions.class));
         }
         return result;
@@ -105,26 +87,18 @@ public final class CriterionBuilder {
         return Restrictions.like(column, input + "%");
     }
 
-    private static boolean formatDateChecker(String input) {
-        final String datePattern = ("/d{4}-/d{4}-/d{4}");
-        return input.matches(datePattern);
-    }
-
-    private static Criterion getDateCriterion(String column, String input)  {
+    private static Criterion getDateCriterion(String column, Date input)  {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
-        Criterion criterion = null;
-        try {
-            criterion = Restrictions.eq(column, new Date(dateFormat.parse(input).getTime()));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Criterion criterion;
+        criterion = Restrictions.eq(column, input);
         return criterion;
     }
 
-    private static Criterion getNumberCriterion(String column, String input) {
-        return Restrictions.eq(column, new BigDecimal(input));
+    private static Criterion getNumberCriterion(String column, BigDecimal bigDecimal) {
+        return Restrictions.eq(column, bigDecimal);
     }
+
     private static Criterion getEnumCriterion(String column, Class<? extends Enum<?>> type) {
         Enum<?> obj = ConsoleInputReader.selectEnum(type);
         return Restrictions.eq(column, obj);

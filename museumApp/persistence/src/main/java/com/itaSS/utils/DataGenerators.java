@@ -11,7 +11,6 @@ import com.itaSS.entity.Worker;
 import com.itaSS.entity.enumInfo.Materials;
 import com.itaSS.entity.enumInfo.Positions;
 import com.itaSS.entity.enumInfo.Technics;
-import sun.util.resources.cldr.ta.CalendarData_ta_IN;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -19,6 +18,7 @@ import java.util.*;
 
 public final class DataGenerators {
     public static Random randomizer = new Random(43);
+    private static Calendar calendar = Calendar.getInstance();
     private static final String[] EXHIBITS_NAME = {"Statuya1", "Statuya2", "Statuya3", "Statuya4",
             "Kartuna1", "Kartuna2", "Kartuna3", "Vaza1", "Vaza2", "Vaza3", "Vaza4"};
     private static final Set<String> MAPPED_EX_NAMES = new HashSet<>();
@@ -38,6 +38,10 @@ public final class DataGenerators {
         for (String name : HALLS_NAME) {
             MAPPED_HALL_NAMES.add(name);
         }
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
     }
 
     private static<T> T getRandVal(T[] arr) {
@@ -46,22 +50,26 @@ public final class DataGenerators {
         return result;
     }
 
+    private static Date genDate(int minYear, int maxYear) {
+        final int nMounths = 12;
+        final int nDays = 28;
+        calendar.set(Calendar.YEAR, randomizer.nextInt(maxYear - minYear) + minYear);
+        calendar.set(Calendar.MONTH, randomizer.nextInt(nMounths) + 1);
+        calendar.set(Calendar.DAY_OF_MONTH, randomizer.nextInt(nDays) + 1);
+        return new Date(calendar.getTime().getTime());
+    }
+
     public static Exhibit genExhibit() {
         Exhibit exhibit = new Exhibit();
+        final int creationDateMin = 1500;
+        final int creationDateMax = 1900;
+        final int arrivalDateMin = 1980;
+        final int arrivalDateMax = 2014;
         String exName = MAPPED_EX_NAMES.iterator().next();
         MAPPED_EX_NAMES.remove(exName);
         exhibit.setName(exName);
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, randomizer.nextInt(25) + 1980);
-        calendar.set(Calendar.MONTH, randomizer.nextInt(12) + 1);
-        calendar.set(Calendar.DAY_OF_MONTH, randomizer.nextInt(28) + 1);
-        calendar.set(Calendar.HOUR, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        exhibit.setArriveDate(new Date(calendar.getTime().getTime()));
-        calendar.set(randomizer.nextInt(500) + 1500, randomizer.nextInt(12) + 1, randomizer.nextInt(28) + 1);
-        exhibit.setCreationDate(new Date(calendar.getTime().getTime()));
+        exhibit.setArriveDate(genDate(arrivalDateMin, arrivalDateMax));
+        exhibit.setCreationDate(genDate(creationDateMin, creationDateMax));
         exhibit.setAuthorName(AUTHORS_NAME[randomizer.nextInt(AUTHORS_NAME.length)]);
         exhibit.setMaterial(getRandVal(Materials.values()));
         exhibit.setTechnic(getRandVal(Technics.values()));
@@ -110,8 +118,11 @@ public final class DataGenerators {
     }
 
     public static Tour genTour() {
+        final int beginDateMin = 2014;
+        final int beginDateMax = 2016;
         Tour tour = new Tour();
-        tour.setTour_name(TOURS_NAME[randomizer.nextInt(TOURS_NAME.length)]);
+        tour.setTourName(TOURS_NAME[randomizer.nextInt(TOURS_NAME.length)]);
+        tour.setBeginDate(genDate(beginDateMin, beginDateMax));
         return tour;
     }
 

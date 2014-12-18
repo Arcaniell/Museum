@@ -23,7 +23,12 @@ public class TourService extends BaseService {
     }
 
     public void updateTour() {
+        System.out.println("ENTER INFO FOR TOUR TO UPDATE: ");
         Tour oldTour = searchTour();
+        while (oldTour == null) {
+            oldTour = searchTour();
+        }
+        System.out.println("ENTER NEW INFO: ");
         tourDao.update(enterTourInfo(oldTour));
     }
 
@@ -44,27 +49,26 @@ public class TourService extends BaseService {
         }
         System.out.println("\tTour name");
         String name = readLine();
-        tour.setTour_name(name);
+        tour.setTourName(name);
 
         System.out.println("Enter additional info, or leave it blank: ");
         System.out.println("\tBegin Date (YYYY-MM-DD)");
         Date infoDate = readDate();
         if (infoDate  != null) {
-            tour.setBegin_Date(infoDate);
+            tour.setBeginDate(infoDate);
         }
         System.out.println("\tEnding Date (YYYY-MM-DD)");
         infoDate = readDate();
         if (infoDate   != null) {
-            tour.setEnd_Date(infoDate);
+            tour.setEndDate(infoDate);
         }
         return tour;
     }
 
     public Tour searchTour() {
-        System.out.println("Enter criteria for Tour search in following format (\"-\" for skip): ");
-        System.out.println("\ttour_name begin_date ending_date");
-        String input = readLine();
-        Set<Criterion> criteria = CriterionBuilder.getTourCriterion(input);
+        System.out.println(searchOptions);
+        Tour searchExample = enterTourInfo();
+        Set<Criterion> criteria = CriterionBuilder.getTourCriterion(searchExample);
         Set<Tour> tours = tourDao.getSpecEntity(criteria);
         int result_size = tours.size();
         while (result_size == zero_result || result_size > many_results ) {
@@ -76,8 +80,8 @@ public class TourService extends BaseService {
                 System.out.println("More then single result, enter search criteria again: ");
                 System.out.println(searchOptions);
             }
-            input = readLine();
-            criteria = CriterionBuilder.getTourCriterion(input);
+            searchExample = enterTourInfo();
+            criteria = CriterionBuilder.getTourCriterion(searchExample);
             tours = tourDao.getSpecEntity(criteria);
             result_size = tours.size();
         }

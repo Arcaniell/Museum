@@ -24,7 +24,11 @@ public class WorkerService extends BaseService{
     }
 
     public void updateWorker() {
+        System.out.println("ENTER INFO FOR WORKER TO UPDATE: ");
         Worker workerOld = searchWorker();
+        while (workerOld == null) {
+            workerOld = searchWorker();
+        }
         workerDao.update(enterWorkerInfo(workerOld));
     }
 
@@ -68,9 +72,8 @@ public class WorkerService extends BaseService{
 
     public Worker searchWorker() {
         System.out.println(searchOptions);
-        System.out.println("\tfirst_name last_name salary position");
-        String input = readLine();
-        Set<Criterion> criteria = CriterionBuilder.getWorkerCriterion(input);
+        Worker searchExample = enterWorkerInfo();
+        Set<Criterion> criteria = CriterionBuilder.getWorkerCriterion(searchExample);
         Set<Worker> workers = workerDao.getSpecEntity(criteria);
         int result_size = workers.size();
         while (result_size == zero_result || result_size > many_results ) {
@@ -82,8 +85,8 @@ public class WorkerService extends BaseService{
                 System.out.println("More then single result, enter search criteria again: ");
                 System.out.println(searchOptions);
             }
-            input = readLine();
-            criteria = CriterionBuilder.getWorkerCriterion(input);
+            searchExample = enterWorkerInfo();
+            criteria = CriterionBuilder.getWorkerCriterion(searchExample);
             workers = workerDao.getSpecEntity(criteria);
             result_size = workers.size();
         }
