@@ -10,5 +10,4 @@ public enum Actions {
     SHOW_HALLS_IN_TOUR, SHOW_EXHIBITS_IN_TOUR,
     SHOW_TOURS_FOR_HALL, SHOW_TOURS_FOR_EXHIBIT,
     EXIT
-//    TODO implement these actions:
 }
