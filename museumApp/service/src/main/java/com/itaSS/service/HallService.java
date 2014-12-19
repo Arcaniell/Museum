@@ -67,13 +67,15 @@ public class HallService extends BaseService{
     public void setHallsToTour() {
         Set<Hall> halls = new HashSet<>();
         while (true) {
-            System.out.println("Select Hall or enter exit");
-            System.out.println(searchOptions);
+            halls.add(searchHall());
+            System.out.println("Select more Halls? (y/n)");
             String input = readLine();
-            if (input.equals("exit")) {
+            if (input.equals("n")) {
                 break;
+            } else if (input.equals("y")) {
+                halls.add(searchHall());
             } else {
-                halls.add(searchHall(input));
+                System.out.println("WHAT????");
             }
         }
         System.out.println(halls);

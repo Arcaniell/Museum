@@ -1,11 +1,15 @@
 package com.itaSS.service;
 
+import com.itaSS.entity.Exhibit;
 import config.DBUnitConfig;
 import org.dbunit.JdbcDatabaseTester;
 import org.dbunit.dataset.IDataSet;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.List;
 
 public class ExhibitServiceTest extends DBUnitConfig{
 
@@ -29,8 +33,9 @@ public class ExhibitServiceTest extends DBUnitConfig{
     }
 
     @Test
-    public void createTest() throws Exception {
-
+    public void testGetAll() throws Exception {
+        List<Exhibit> exhibits = service.getAll();
+        Assert.assertEquals("Hi", "Hi");
     }
 
 }

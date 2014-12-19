@@ -61,7 +61,7 @@ public class WorkerService extends BaseService{
             while (!checkName(lastName)) {
                 lastName = readLine();
             }
-            worker.setLastName(name);
+            worker.setLastName(lastName);
         }
 
         System.out.println("Enter additional info, or leave it blank: ");

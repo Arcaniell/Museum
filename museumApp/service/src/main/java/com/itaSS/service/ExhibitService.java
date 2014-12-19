@@ -20,7 +20,7 @@ public class ExhibitService extends BaseService {
     private static ExhibitDao exhibitDao = new ExhibitDao();
 
     public List<Exhibit> getAll() {
-        return getAll();
+        return exhibitDao.getAll();
     }
 
     public void addExhibit() {

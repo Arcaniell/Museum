@@ -24,8 +24,9 @@ public abstract class BaseDao<T, E extends Serializable> {
         session = SessionFact.getSessionFactory().openSession();
         Criteria criteria = session.createCriteria(entityClass)
                 .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+        List<T> result = criteria.list();
         session.close();
-        return criteria.list();
+        return result;
     }
 
     public E create(T entity) {

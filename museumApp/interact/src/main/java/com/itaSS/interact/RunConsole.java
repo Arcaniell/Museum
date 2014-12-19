@@ -1,6 +1,5 @@
 package com.itaSS.interact;
 
-
 import com.itaSS.utils.DataGenerators;
 
 public class RunConsole {
