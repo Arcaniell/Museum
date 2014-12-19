@@ -66,8 +66,8 @@ public class HallService extends BaseService{
 
     public void setHallsToTour() {
         Set<Hall> halls = new HashSet<>();
+        halls.add(searchHall());
         while (true) {
-            halls.add(searchHall());
             System.out.println("Select more Halls? (y/n)");
             String input = readLine();
             if (input.equals("n")) {
