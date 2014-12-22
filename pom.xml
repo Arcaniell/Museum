@@ -9,7 +9,11 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>museumApp</module>
+        <module>persistence</module>
+        <module>utils</module>
+        <module>service</module>
+        <module>interact</module>
+        <module>web</module>
     </modules>
 
     <properties>

@@ -1,5 +1,6 @@
 package com.itaSS.interact;
 
+import com.itaSS.dao.EntityManagerFact;
 import com.itaSS.dao.SessionFact;
 import com.itaSS.entity.Exhibit;
 import com.itaSS.entity.Hall;
@@ -82,6 +83,7 @@ public class Console {
         try {
             SessionFact.closeFactory();
             ConsoleInputReader.close();
+            EntityManagerFact.close();
         } catch (IOException e) {
             System.out.println("Error while closing Console Resources!!!");
             e.printStackTrace();
