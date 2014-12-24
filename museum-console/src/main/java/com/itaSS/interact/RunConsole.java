@@ -1,6 +1,7 @@
 package com.itaSS.interact;
 
-import com.itaSS.service.utils.DataGenerators;
+import com.itaSS.service.DataGenerator;
+import com.itaSS.service.implementation.DataGeneratorsImp;
 
 public class RunConsole {
     private Console console = new Console();
@@ -14,7 +15,8 @@ public class RunConsole {
     }
 
     public static void main(String[] args) {
-//        DataGenerators.generateData();
+//        DataGenerator dataGenerator = new DataGeneratorsImp();
+//        dataGenerator.generateData();
 //        RunConsole runConsole = new RunConsole();
 //        runConsole.run();
 //        runConsole.stop();
