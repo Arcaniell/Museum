@@ -5,6 +5,7 @@ import com.itaSS.entity.Hall;
 import com.itaSS.entity.Tour;
 import com.itaSS.service.HallService;
 import com.itaSS.service.utils.SearchOpt;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.HashSet;
@@ -13,6 +14,7 @@ import java.util.Set;
 import static com.itaSS.service.utils.ConsoleInputReader.readLine;
 import static com.itaSS.service.utils.RegExCheck.*;
 
+@Service
 public class HallServiceImp extends BaseServiceImp
         implements HallService{
 

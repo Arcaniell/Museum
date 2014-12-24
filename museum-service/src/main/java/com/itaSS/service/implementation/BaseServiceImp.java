@@ -1,7 +1,9 @@
 package com.itaSS.service.implementation;
 
 import com.itaSS.service.BaseService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BaseServiceImp implements BaseService{
 
     protected final int many_results = 1;

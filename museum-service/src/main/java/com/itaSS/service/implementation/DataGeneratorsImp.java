@@ -1,4 +1,4 @@
-package com.itaSS.service.utils;
+package com.itaSS.service.implementation;
 
 import com.itaSS.dao.ExhibitDao;
 import com.itaSS.dao.HallDao;
@@ -11,21 +11,22 @@ import com.itaSS.entity.Worker;
 import com.itaSS.entity.enumInfo.Materials;
 import com.itaSS.entity.enumInfo.Positions;
 import com.itaSS.entity.enumInfo.Technics;
+import com.itaSS.service.DataGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.*;
 
 @Service
-public final class DataGenerators {
+public final class DataGeneratorsImp implements DataGenerator{
     public static Random randomizer = new Random(43);
     private static Calendar calendar = Calendar.getInstance();
     private static final String[] EXHIBITS_NAME = {"Statuya1", "Statuya2", "Statuya3", "Statuya4",
             "Kartuna1", "Kartuna2", "Kartuna3", "Vaza1", "Vaza2", "Vaza3", "Vaza4"};
     private static final Set<String> MAPPED_EX_NAMES = new HashSet<>();
-    private static int counter = 0;
     private static final String[] AUTHORS_NAME = {"Vasiliy", "Sashko", "Bodia", "Tolik", "Pavlo",
             "Victoria", "Nazar"};
     private static final String[] HALLS_NAME = {"A", "B", "C", "D", "E", "F", "G"};
@@ -34,14 +35,16 @@ public final class DataGenerators {
     private static final String[] WORKERS_FIRST_NAME = {"Ania", "Petro", "Kolia", "Yan", "Arbuz", "Dinka", "Plant"};
     private static final String[] WORKERS_LAST_NAME = {"Abramovich", "Yanucovich", "Yaceniuk", "Poroshenko",
             "Samsung"};
+
     @Autowired
-    private static ExhibitDao exhibitDao;
+    private ExhibitDao exhibitDao;
     @Autowired
-    private static HallDao hallDao;
+    private HallDao hallDao;
     @Autowired
-    private static TourDao tourDao;
+    private TourDao tourDao;
     @Autowired
-    private static WorkerDao workerDao;
+    private WorkerDao workerDao;
+
     static {
         for (String name : EXHIBITS_NAME) {
             MAPPED_EX_NAMES.add(name);
@@ -145,18 +148,19 @@ public final class DataGenerators {
         return list;
     }
 
-    public static void generateData() {
+    @Transactional
+    public void generateData() {
 
-        for (Exhibit exhibit : DataGenerators.genExhibitList()) {
+        for (Exhibit exhibit : DataGeneratorsImp.genExhibitList()) {
             exhibitDao.create(exhibit);
         }
-        for (Hall hall : DataGenerators.genHallList()) {
+        for (Hall hall : DataGeneratorsImp.genHallList()) {
             hallDao.create(hall);
         }
-        for (Tour tour : DataGenerators.genTourList()) {
+        for (Tour tour : DataGeneratorsImp.genTourList()) {
             tourDao.create(tour);
         }
-        for (Worker worker : DataGenerators.genWorkersList()) {
+        for (Worker worker : DataGeneratorsImp.genWorkersList()) {
             workerDao.create(worker);
         }
     }

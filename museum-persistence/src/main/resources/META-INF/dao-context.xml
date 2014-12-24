@@ -24,7 +24,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
         </property>
-        <property name="persistenceXmlLocation" value="classpath: /META-INF/persistence.xml" />
+        <property name="persistenceXmlLocation" value="classpath:/META-INF/persistence.xml" />
         <property name="persistenceUnitName" value="MuseumJPAHib" />
     </bean>
 

@@ -8,6 +8,7 @@ import com.itaSS.entity.enumInfo.Positions;
 import com.itaSS.service.WorkerService;
 import com.itaSS.service.utils.SearchOpt;
 import org.hibernate.criterion.Criterion;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Set;
@@ -15,6 +16,7 @@ import java.util.Set;
 import static com.itaSS.service.utils.ConsoleInputReader.*;
 import static com.itaSS.service.utils.RegExCheck.*;
 
+@Service
 public class WorkerServiceImp extends BaseServiceImp
         implements WorkerService{
 

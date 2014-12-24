@@ -7,6 +7,7 @@ import com.itaSS.entity.Tour;
 import com.itaSS.service.TourService;
 import com.itaSS.service.utils.SearchOpt;
 import org.hibernate.criterion.Criterion;
+import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.util.Set;
@@ -14,6 +15,7 @@ import java.util.Set;
 import static com.itaSS.service.utils.ConsoleInputReader.*;
 import static com.itaSS.service.utils.RegExCheck.*;
 
+@Service
 public class TourServiceImp extends BaseServiceImp
         implements TourService{
 

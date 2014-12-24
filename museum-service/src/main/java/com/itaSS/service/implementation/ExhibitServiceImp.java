@@ -7,7 +7,10 @@ import com.itaSS.entity.Tour;
 import com.itaSS.entity.enumInfo.Materials;
 import com.itaSS.entity.enumInfo.Technics;
 import com.itaSS.service.ExhibitService;
+import com.itaSS.service.HallService;
 import com.itaSS.service.utils.SearchOpt;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.CriteriaQuery;
 import java.sql.Date;
@@ -17,10 +20,14 @@ import java.util.Set;
 import static com.itaSS.service.utils.ConsoleInputReader.*;
 import static com.itaSS.service.utils.RegExCheck.*;
 
+@Service
 public class ExhibitServiceImp extends BaseServiceImp
         implements ExhibitService{
 
     private static ExhibitDaoImp exhibitDao = new ExhibitDaoImp();
+
+    @Autowired
+    HallService hallService;
 
     public List<Exhibit> getAll() {
         return exhibitDao.getAll();
